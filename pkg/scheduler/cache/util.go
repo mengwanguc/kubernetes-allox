@@ -73,7 +73,7 @@ const (
 	// FS       string = "FS"
 )
 
-const NvidiaGPU = "nvidia.com/gpu"
+const NvidiaGPU = "ucare.cs.uchicago.edu/e-gpu"
 
 type ProcessingTime struct {
 	pod            *v1.Pod

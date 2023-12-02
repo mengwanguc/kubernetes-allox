@@ -39,8 +39,8 @@ https://stackoverflow.com/questions/37586169/creating-custom-scheduler-doesnt-wo
 cd kubernetes-allox
 make
 
-sudo docker build -t wangm12/my-kube-scheduler:v1.12.10 .
-sudo docker push wangm12/my-kube-scheduler:v1.12.10
+sudo docker build -t wangm12/my-kube-scheduler:allox-egpu .
+sudo docker push wangm12/my-kube-scheduler:allox-egpu
 kubectl create -f my-scheduler.yaml
 kubectl get pods --namespace=kube-system
 kubectl get pods --all-namespaces
