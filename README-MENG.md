@@ -38,9 +38,11 @@ https://stackoverflow.com/questions/37586169/creating-custom-scheduler-doesnt-wo
 ```
 cd kubernetes-allox
 make
+make kube-scheduler
 
 sudo docker build -t wangm12/my-kube-scheduler:allox-egpu .
 sudo docker push wangm12/my-kube-scheduler:allox-egpu
+kubectl delete -f my-scheduler.yaml
 kubectl create -f my-scheduler.yaml
 kubectl get pods --namespace=kube-system
 kubectl get pods --all-namespaces
@@ -48,5 +50,7 @@ kubectl get pods --all-namespaces
 
 ```
 kubectl describe pod my-scheduler-5dbbfd997f-p6bhs -n kube-system
-kubectl logs my-scheduler-599f974bd8-sd2hw -n kube-system
+kubectl logs my-scheduler-96649cb67-446nt -n kube-system
 ```
+
+Force Kubernetes to pull image: https://www.baeldung.com/ops/kubernetes-pull-image-again#:~:text=One%20way%20to%20force%20Kubernetes,already%20present%20on%20the%20node.

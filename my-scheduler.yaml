@@ -46,6 +46,7 @@ spec:
         - --leader-elect=false
         - --scheduler-name=my-scheduler
         image: wangm12/my-kube-scheduler:allox-egpu
+        imagePullPolicy: Always
         livenessProbe:
           httpGet:
             path: /healthz

@@ -22,6 +22,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	builtinRuntime "runtime"
 	"time"
 
 	"github.com/golang/glog"
@@ -109,6 +110,18 @@ var START_TIME = time.Now()
 var ARRIVAL_TIME = 0
 
 const SECOND = 1000000000
+
+func printCallStack() {
+	buf := make([]byte, 1<<16) // Create a buffer to store the call stack trace
+
+	// Capture the call stack of the current goroutine and store it in the buffer
+	n := builtinRuntime.Stack(buf, false)
+
+	// Print the call stack trace to the standard output
+	// fmt.Printf("Call Stack Trace:\n%s", buf[:n])
+	glog.Infof("[meng] Call Stack Trace:\n%s", buf[:n])
+}
+
 
 func InitAllNameSpaces(numOfUser int) {
 	for i := 1; i <= numOfUser; i++ {
@@ -298,7 +311,9 @@ func InitParameters() {
 }
 
 func SynClusterInfo(nn map[string]*NodeInfo, n []*v1.Node) {
-	// glog.Infof("[tanle] SynClusterInfo %v/%v", CAPACITY)
+	glog.Infof("[meng] SynClusterInfo %v", CAPACITY)
+	glog.Infof("[meng] SynClusterInfo nodeinfo nn %v", nn)
+	glog.Infof("[meng] SynClusterInfo nodes nn %v", n)
 	if nn != nil {
 		NodeNameToInfo = nn
 	}
@@ -330,6 +345,7 @@ func RequestedResources() (*Resource, *Resource) {
 }
 
 func GetResourceUsageAndCapacity() (*Resource, *Resource) {
+	// printCallStack()
 	usage := &Resource{MilliCPU: 0, Memory: 0, ScalarResources: map[v1.ResourceName]int64{NvidiaGPU: 0}}
 	capacity := &Resource{MilliCPU: 0, Memory: 0, ScalarResources: map[v1.ResourceName]int64{NvidiaGPU: 0}}
 

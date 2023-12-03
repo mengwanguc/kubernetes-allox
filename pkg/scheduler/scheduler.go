@@ -413,6 +413,7 @@ func (sched *Scheduler) bind(assumed *v1.Pod, b *v1.Binding) error {
 
 // scheduleOne does the entire scheduling workflow for a single pod.  It is serialized on the scheduling algorithm's host fitting.
 func (sched *Scheduler) scheduleOne() {
+	glog.Infof("[meng] scheduleOne()")
 	//tanle syn cache info
 	sched.config.SchedulerCache.UpdateNodeNameToInfoMap(schedulercache.NodeNameToInfo)
 	//[tanle] update cluster info
