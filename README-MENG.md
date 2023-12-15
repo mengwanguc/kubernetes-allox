@@ -50,7 +50,16 @@ kubectl get pods --all-namespaces
 
 ```
 kubectl describe pod my-scheduler-5dbbfd997f-p6bhs -n kube-system
-kubectl logs my-scheduler-96649cb67-446nt -n kube-system
+kubectl logs my-scheduler-96649cb67-285f5 -n kube-system
 ```
 
 Force Kubernetes to pull image: https://www.baeldung.com/ops/kubernetes-pull-image-again#:~:text=One%20way%20to%20force%20Kubernetes,already%20present%20on%20the%20node.
+
+
+# create namespaces
+
+```
+cd pod/sched
+bash create-namespaces.sh
+kubectl get namespaces --show-labels
+```

@@ -456,6 +456,7 @@ func (g *genericScheduler) SynClusterInfo(nodeLister algorithm.NodeLister) {
 	if err != nil {
 		return
 	}
+	err = g.cache.UpdateNodeNameToInfoMap(g.cachedNodeInfoMap)  // always update cachedNodeInfoMap first
 	schedulercache.SynClusterInfo(g.cachedNodeInfoMap, nodes)
 }
 

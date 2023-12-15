@@ -1605,6 +1605,7 @@ func (c *configFactory) getPluginArgs() (*PluginFactoryArgs, error) {
 
 func (c *configFactory) getNextPod() *v1.Pod {
 	if schedulercache.ENABLE_ONLINE_SCHEDULER {
+		glog.Infof("[meng] getNextPod()")
 		if pod := c.podQueue.PickNextPod(c.GetClient()); pod != nil {
 			return pod
 		} else {

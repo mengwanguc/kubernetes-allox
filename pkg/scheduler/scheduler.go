@@ -413,18 +413,23 @@ func (sched *Scheduler) bind(assumed *v1.Pod, b *v1.Binding) error {
 
 // scheduleOne does the entire scheduling workflow for a single pod.  It is serialized on the scheduling algorithm's host fitting.
 func (sched *Scheduler) scheduleOne() {
-	glog.Infof("[meng] scheduleOne()")
+	glog.Infof("[meng] scheduleOne()...")
 	//tanle syn cache info
 	sched.config.SchedulerCache.UpdateNodeNameToInfoMap(schedulercache.NodeNameToInfo)
+	glog.Infof("[meng] scheduleOne() after UpdateNodeNameToInfoMap, schedulercache.NodeNameToInfo is: %v", schedulercache.NodeNameToInfo)
 	//[tanle] update cluster info
 	sched.config.Algorithm.SynClusterInfo(sched.config.NodeLister)
+	glog.Infof("[meng] scheduleOne() after SynClusterInfo, schedulercache.NodeNameToInfo is: %v", schedulercache.NodeNameToInfo)
+	
 	pod := sched.config.NextPod()
 
 	if schedulercache.ENABLE_ONLINE_SCHEDULER {
 		if pod == nil { // tanle : do nothing when there is no pod.
+			glog.Infof("[meng] scheduleOne() there is no pod...")
 			return
 		}
 		//tanle add the to temp scheduled queue
+		glog.Infof("[meng] scheduleOne() adding pod to pod queue...")
 		schedulercache.AddToSchedPodQueue(pod)
 		// tanle delete the pod from the queue if it is scheduled
 		// If it is failed, it will be added back to the queue later
@@ -437,6 +442,7 @@ func (sched *Scheduler) scheduleOne() {
 		return
 	}
 
+	glog.Infof("[meng] Attempting to schedule pod: %v/%v", pod.Namespace, pod.Name)
 	glog.V(3).Infof("Attempting to schedule pod: %v/%v", pod.Namespace, pod.Name)
 
 	// Synchronously attempt to find a fit for the pod.

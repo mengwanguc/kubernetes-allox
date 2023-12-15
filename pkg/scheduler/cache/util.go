@@ -54,7 +54,7 @@ var USING_FIFO = false
 const NUM_RESERVE_CPU_NODE = 1 //for master
 const MASTER_CPU_CORES = 20    //for master
 
-var QUEUED_UP_JOBS = 40 //
+var QUEUED_UP_JOBS = 1 //
 var AlloX_DEBUG = true
 
 // TODO: WORK AROUND  = break deadlock at begginning.
@@ -313,7 +313,7 @@ func InitParameters() {
 func SynClusterInfo(nn map[string]*NodeInfo, n []*v1.Node) {
 	glog.Infof("[meng] SynClusterInfo %v", CAPACITY)
 	glog.Infof("[meng] SynClusterInfo nodeinfo nn %v", nn)
-	glog.Infof("[meng] SynClusterInfo nodes nn %v", n)
+	glog.Infof("[meng] SynClusterInfo nodes n %v", n)
 	if nn != nil {
 		NodeNameToInfo = nn
 	}
@@ -891,8 +891,9 @@ func CreatePodOnOtherDevice(pod *v1.Pod, toBeGPU bool) (*v1.Pod, bool) {
 
 func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 	// get the list of active users (having jobs queued up.)
+	glog.Infof("  Calling EqualShare to schedule...")
 	users := GetQueueUsers(allPods)
-	// glog.Infof("[tanle] active users: %v", users)
+	glog.Infof("[tanle] active users: %v", users)
 	// get resource usage on each user
 	resourceMap := make(map[string]*Resource)
 	for _, user := range users {
@@ -903,7 +904,7 @@ func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 	shortestGPUComplt := int64(math.MaxInt64)
 	isGPUAvaiable := false
 	usage, capacity := GetResourceUsageAndCapacity()
-	// glog.Infof("[tanle] GetResourceUsageAndCapacity usage/capacity %v/", usage, capacity)
+	glog.Infof("[tanle] GetResourceUsageAndCapacity usage/capacity %v/", usage, capacity)
 
 	isGPUAvaiable = (capacity.ScalarResources[NvidiaGPU] - usage.ScalarResources[NvidiaGPU]) > NUM_RESERVE_GPU
 	isCPUAvaiable := (capacity.MilliCPU - usage.MilliCPU) > (NUM_RESERVE_CPU)*MILLI
