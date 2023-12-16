@@ -42,7 +42,7 @@ import (
 /*************** IMPORTANT PARAMETERs *******************/
 const SCHEDULER = ES
 const AlphaFair = 0.5 //
-const NUM_USERS = 4
+const NUM_USERS = 3
 const SCHEDULER_PERIOD = 100 // Miliseconds
 
 const AVG_BETA = 95.0 * MILLI // based on simulator.
@@ -670,6 +670,10 @@ func GetGpuComplTime(pod *v1.Pod) int64 {
 	cmdIdx := 4
 	for _, container := range pod.Spec.Containers {
 		// switch demands
+		glog.Infof("    container commands: %v", container.Command)
+		for _, c := range container.Command {
+			glog.Infof("        each commnad: %v", c)
+		}
 		if strings.Contains(container.Image, "gpu") {
 			cmdIdx = 4 // primary
 		} else {
@@ -830,9 +834,26 @@ func CreatePodOnOtherDevice_bk(pod *v1.Pod, toBeGPU bool) (*v1.Pod, bool) {
 	return pod, true
 }
 
+/* 
+Meng's understanding:
+  If the pod was initially set to run on GPU, but now is assigned CPUs,
+  two things need to be changed for this pod:
+  1. the image should be using a CPU image now
+  2. The primary and secondary commands should be exchanged.
+	- primary command (4) contains resource demands for the primary compute unit (GPU here)
+	- secondary command (5) contains resource demands when running on CPUs
+	Since we are changing the compute unit, we need to switch primary and secondary.
+
+What I don't understand:
+  Why use GetSecondaryDemand after the switch?
+  After the switch, the primary command is now for the new compute unit (CPU).
+  So we should just use the primary command.
+
+*/
 func CreatePodOnOtherDevice(pod *v1.Pod, toBeGPU bool) (*v1.Pod, bool) {
 	// check the device of the pod
 	for _, container := range pod.Spec.Containers {
+		glog.Infof("    container image: %v", container.Image)
 		if strings.Contains(container.Image, "gpu") && toBeGPU {
 			return pod, false
 		}
@@ -894,6 +915,7 @@ func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 	glog.Infof("  Calling EqualShare to schedule...")
 	users := GetQueueUsers(allPods)
 	glog.Infof("[tanle] active users: %v", users)
+	glog.Infof("[meng] allPods: %v", allPods)
 	// get resource usage on each user
 	resourceMap := make(map[string]*Resource)
 	for _, user := range users {
@@ -910,6 +932,7 @@ func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 	isCPUAvaiable := (capacity.MilliCPU - usage.MilliCPU) > (NUM_RESERVE_CPU)*MILLI
 
 	if isGPUAvaiable {
+		glog.Infof("[meng] isGPUAvaiable")
 		gpuShare := capacity.ScalarResources[NvidiaGPU] / int64(NUM_USERS)
 		var minUser string
 		minGpuUsage := int64(math.MaxInt64)
@@ -922,11 +945,13 @@ func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 			}
 		}
 
+		glog.Infof("[meng] minUser: %v  minGpuUsage: %v gpuShare: %v", minUser, minGpuUsage, gpuShare)
 		// static allocation
 		if minGpuUsage < gpuShare {
 			// glog.Infof("[tanle] pick user: %v", minUser)
 			// pick the pod with the shortest GPU complt.
 			// pod := allPods[0]
+			glog.Infof("[meng] USING_FIFO: %v", USING_FIFO)
 			if USING_FIFO {
 				for _, p := range allPods {
 					if minUser == p.Namespace {
@@ -938,6 +963,7 @@ func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 			} else {
 				for _, p := range allPods {
 					complTime := GetGpuComplTime(p)
+					glog.Infof("[meng] GetGpuComplTime: %v", complTime)
 					if minUser == p.Namespace && GetGpuComplTime(p) < shortestGPUComplt {
 						pod = p
 						shortestGPUComplt = complTime
@@ -956,6 +982,7 @@ func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 	}
 
 	if isCPUAvaiable {
+		glog.Infof("[meng] isCPUAvaiable")
 		cpuShare := (capacity.MilliCPU - (MASTER_CPU_CORES * MILLI)) / int64(NUM_USERS)
 		roundCPUShare := cpuShare / int64(CPU_DEMAND_PER_JOB*1000)
 

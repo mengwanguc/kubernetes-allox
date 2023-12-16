@@ -50,7 +50,7 @@ kubectl get pods --all-namespaces
 
 ```
 kubectl describe pod my-scheduler-5dbbfd997f-p6bhs -n kube-system
-kubectl logs my-scheduler-96649cb67-285f5 -n kube-system
+kubectl logs my-scheduler-96649cb67-gmtmb -n kube-system
 ```
 
 Force Kubernetes to pull image: https://www.baeldung.com/ops/kubernetes-pull-image-again#:~:text=One%20way%20to%20force%20Kubernetes,already%20present%20on%20the%20node.
@@ -63,3 +63,29 @@ cd pod/sched
 bash create-namespaces.sh
 kubectl get namespaces --show-labels
 ```
+
+
+
+## Reserve CPU/memory resources
+
+
+
+## Notes
+
+scheduler.go: SchedulerOne() ->
+factory.go: getNextPod() ->
+scheduling_queue.go: PickNextPod(client clientset.Interface) ->
+util.go: EqualShare(allPods []*v1.Pod, client clientset.Interface) ->
+
+
+
+
+
+strDemands := strings.Split(container.Command[cmdIdx], ",")
+cpuDemand: strDemands[0]
+gpuDemand: strDemands[1]
+memDemand: strDemands[2]
+cTime: strDemands[3]
+
+
+AllocatableResource:&cache.Resource{MilliCPU:96000, Memory:201105616896, EphemeralStorage:405676817761, AllowedPodNumber:110, ScalarResources:map[v1.ResourceName]int64{"hugepages-1Gi":0, "hugepages-2Mi":0, "ucare.cs.uchicago.edu/e-gpu":3, "github.com/e-gpu":0}}}

@@ -10,3 +10,11 @@ spec:
   containers:
   - name: pod-with-second-annotation-container
     image: k8s.gcr.io/pause:2.0
+    command:
+    - sh
+    - -c
+    - |
+      ls /edev;
+      ls /edev;
+      ls /edev;
+      sleep 1000000;
