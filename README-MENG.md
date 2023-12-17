@@ -66,6 +66,15 @@ kubectl get namespaces --show-labels
 
 
 
+
+# custom docker images
+
+DOCKER_BUILDKIT=1 sudo docker build -t gpemu-pytorch:base .
+sudo docker run --ulimit memlock=-1:-1 -it gpemu-pytorch:base /bin/bash
+
+sudo docker push wangm12/gpemu-pytorch:base
+
+
 ## Reserve CPU/memory resources
 
 

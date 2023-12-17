@@ -671,8 +671,8 @@ func GetGpuComplTime(pod *v1.Pod) int64 {
 	for _, container := range pod.Spec.Containers {
 		// switch demands
 		glog.Infof("    container commands: %v", container.Command)
-		for _, c := range container.Command {
-			glog.Infof("        each commnad: %v", c)
+		for i, c := range container.Command {
+			glog.Infof("       %v: each commnad: %v", i, c)
 		}
 		if strings.Contains(container.Image, "gpu") {
 			cmdIdx = 4 // primary
