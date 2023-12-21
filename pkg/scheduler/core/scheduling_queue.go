@@ -171,10 +171,10 @@ func (f *FIFO) PickNextPod(client clientset.Interface) *v1.Pod { // tanle
 		// 	periodicCount++
 		// }
 		allPods := f.List()
-		glog.Infof("  allPods length : %v", len(allPods))
+		// glog.Infof("  allPods length : %v", len(allPods))
 		var pod = schedulercache.ProfilingSchedule(allPods)
 		if pod == nil {
-			glog.Infof("    pod is nil: %v", pod)
+			// glog.Infof("    pod is nil: %v", pod)
 			// if len(allPods) > 0 {
 			// 	pod = allPods[0]
 			// 	f.Delete(pod)

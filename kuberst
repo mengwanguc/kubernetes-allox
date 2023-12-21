@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Check if at least one argument is provided
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 <pod_yaml_filepath>"
+  exit 1
+fi
+
+kubectl delete -f $1
+kubectl create -f $1

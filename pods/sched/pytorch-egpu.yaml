@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pytorch-egpu
+  namespace: user1
+spec:
+  schedulerName: my-scheduler
+  restartPolicy: OnFailure
+  containers:
+  - name: pytorch-egpu-ctr
+    image: wangm12/gpemu-pytorch:egpu
+    imagePullPolicy: Always
+    resources:
+      limits:
+        ucare.cs.uchicago.edu/e-gpu: 1
+    command:
+    - bash
+    - /app/self-check.sh
+    - hi1
+    - hi2
+    - 1000,1,20,1000
+    - 10000,0,20,2000
+    - '1000'
+    volumeMounts:
+    - mountPath: /data
+      name: data-volume
+    # For shared memory. Otherwise will get insufficient shared memory error
+    - mountPath: /dev/shm
+      name: dshm
+  volumes:
+  - name: data-volume
+    hostPath:
+      path: /data
+      type: Directory
+  - name: dshm
+    emptyDir:
+      medium: Memory

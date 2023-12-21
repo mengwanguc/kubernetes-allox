@@ -27,6 +27,10 @@ then
 source ~/.bashrc
 ```
 
+## reset-pod
+cd ~/kubernetes-allox
+sudo cp ~/kubernetes-allox/kuberst /usr/local/bin
+
 
 ## compile
 https://github.com/kubernetes/website/blob/release-1.12/content/en/docs/tasks/administer-cluster/configure-multiple-schedulers.md
@@ -50,7 +54,10 @@ kubectl get pods --all-namespaces
 
 ```
 kubectl describe pod my-scheduler-5dbbfd997f-p6bhs -n kube-system
-kubectl logs my-scheduler-96649cb67-gmtmb -n kube-system
+kubectl logs my-scheduler-96649cb67-z6mrz  -n kube-system
+kubectl logs pytorch-egpu -n user1
+kubectl describe pod pytorch-egpu -n user1
+kubectl exec --stdin --tty pytorch-egpu -n user1 -- /bin/bash
 ```
 
 Force Kubernetes to pull image: https://www.baeldung.com/ops/kubernetes-pull-image-again#:~:text=One%20way%20to%20force%20Kubernetes,already%20present%20on%20the%20node.
@@ -69,11 +76,29 @@ kubectl get namespaces --show-labels
 
 # custom docker images
 
-DOCKER_BUILDKIT=1 sudo docker build -t gpemu-pytorch:base .
+DOCKER_BUILDKIT=1 sudo docker build -t wangm12/gpemu-pytorch:base .
 sudo docker run --ulimit memlock=-1:-1 -it gpemu-pytorch:base /bin/bash
 
 sudo docker push wangm12/gpemu-pytorch:base
 
+
+DOCKER_BUILDKIT=1 sudo docker build -t wangm12/gpemu-pytorch:egpu .
+sudo docker push wangm12/gpemu-pytorch:egpu
+
+
+kubectl logs pytorch-egpu -n user1
+kubectl exec --stdin --tty pytorch-egpu -n user1 -- /bin/bash
+
+
+DOCKER_BUILDKIT=1 sudo docker build -t wangm12/gpemu-pytorch:cpu .
+sudo docker push wangm12/gpemu-pytorch:cpu
+
+kubectl logs pytorch-cpu -n user1
+kubectl exec --stdin --tty pytorch-egpu -n user1 -- /bin/bash
+
+
+
+kubectl logs my-scheduler-96649cb67-z6mrz  -n kube-system
 
 ## Reserve CPU/memory resources
 

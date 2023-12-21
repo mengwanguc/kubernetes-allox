@@ -312,8 +312,8 @@ func InitParameters() {
 
 func SynClusterInfo(nn map[string]*NodeInfo, n []*v1.Node) {
 	glog.Infof("[meng] SynClusterInfo %v", CAPACITY)
-	glog.Infof("[meng] SynClusterInfo nodeinfo nn %v", nn)
-	glog.Infof("[meng] SynClusterInfo nodes n %v", n)
+	glog.Infof("[meng] SynClusterInfo nodeinfo nn len %v", len(nn))
+	glog.Infof("[meng] SynClusterInfo nodes n len: %v", len(n))
 	if nn != nil {
 		NodeNameToInfo = nn
 	}
@@ -634,6 +634,8 @@ func GetDemand(pod *v1.Pod, isGpu bool) (int64, int64, int64) {
 	memInGi := int64(0)
 	for _, container := range pod.Spec.Containers {
 		cmdIdx := 4
+
+		glog.Infof("[meng] Calling GetDemand!!!!!! isGpu: %v, container.Image: %v", isGpu, container.Image)
 		if isGpu && strings.Contains(container.Image, "gpu") {
 			cmdIdx = 4 // primary
 		} else {
@@ -642,6 +644,8 @@ func GetDemand(pod *v1.Pod, isGpu bool) (int64, int64, int64) {
 
 		// switch demands
 		secDemand := container.Command[cmdIdx]
+
+		glog.Infof("[meng] GetDemand cmdIdx: %v, demand: %v", cmdIdx, secDemand)
 
 		strDemands := strings.Split(secDemand, ",")
 		cpuDemand, err := strconv.ParseInt(strDemands[0], 10, 64)
@@ -853,7 +857,7 @@ What I don't understand:
 func CreatePodOnOtherDevice(pod *v1.Pod, toBeGPU bool) (*v1.Pod, bool) {
 	// check the device of the pod
 	for _, container := range pod.Spec.Containers {
-		glog.Infof("    container image: %v", container.Image)
+		glog.Infof("    CreatePodOnOtherDevice container image: %v", container.Image)
 		if strings.Contains(container.Image, "gpu") && toBeGPU {
 			return pod, false
 		}
