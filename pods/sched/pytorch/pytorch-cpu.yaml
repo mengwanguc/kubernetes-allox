@@ -10,6 +10,11 @@ spec:
   - name: pytorch-cpu-ctr
     image: wangm12/gpemu-pytorch:cpu
     imagePullPolicy: Always
+    resources:
+      requests:
+        cpu: "20000m" # 20 CPUs
+      limits:
+        cpu: "20000m" # 20 CPUs
     command:
     - bash
     - /app/self-check.sh

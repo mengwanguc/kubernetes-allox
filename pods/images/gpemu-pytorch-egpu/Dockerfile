@@ -6,3 +6,4 @@ COPY . .
 RUN chmod +x self-check.sh
 
 RUN ls
+RUN pwd

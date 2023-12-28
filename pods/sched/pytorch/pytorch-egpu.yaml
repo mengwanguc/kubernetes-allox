@@ -11,8 +11,12 @@ spec:
     image: wangm12/gpemu-pytorch:egpu
     imagePullPolicy: Always
     resources:
+      requests:
+        ucare.cs.uchicago.edu/e-gpu: 1
+        cpu: "20000m" # 20 CPUs
       limits:
         ucare.cs.uchicago.edu/e-gpu: 1
+        cpu: "20000m" # 20 CPUs
     command:
     - bash
     - /app/self-check.sh

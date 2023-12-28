@@ -1,10 +1,13 @@
 # https://github.com/pytorch/examples/blob/6ab697cbaaa164b6eca551e8e8428dfa3b1d1e4b/imagenet/main.py
+import time
+
+program_start = time.time()
 
 import argparse
 import os
 import random
 import shutil
-import time
+
 import warnings
 
 import torch
@@ -76,6 +79,8 @@ parser.add_argument('--multiprocessing-distributed', action='store_true',
                          'N processes per node, which has N GPUs. This is the '
                          'fastest way to use PyTorch for either single node or '
                          'multi node data parallel training')
+parser.add_argument('--kuber-profiling', default=False, type=bool,
+                    metavar='KUBER_PROFILING', help='profile for kubernetes')
 
 best_acc1 = 0
 
@@ -243,6 +248,8 @@ def main_worker(gpu, ngpus_per_node, args):
         validate(val_loader, model, criterion, args)
         return
 
+    print("---- initialization takes {} seconds".format(time.time() - program_start))
+
     for epoch in range(args.start_epoch, args.epochs):
         if args.distributed:
             train_sampler.set_epoch(epoch)
@@ -287,6 +294,8 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
     model.train()
 
     end = time.time()
+    batch_start = time.time()
+    epoch_start = time.time()
     for i, (images, target) in enumerate(train_loader):
         # measure data loading time
         if args.gpu is not None:
@@ -296,7 +305,10 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
 
         # compute output
         output = model(images)
-        loss = criterion(output, target)
+        if args.arch in ['googlenet', 'inception_v3']:
+            loss = criterion(output.logits, target)
+        else:
+            loss = criterion(output, target)
 
         # measure accuracy and record loss
         # acc1, acc5 = accuracy(output, target, topk=(1, 5))
@@ -316,10 +328,17 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
         # if i % args.print_freq == 0:
         #     progress.display(i)
 
-        if (i+1) % 10 == 0:
-            print('batch {}  avg batch time: {}'.format(i, (time.time()-end)/(i+1)))
+        batch_time = time.time() - batch_start
+        avg_batch_time = (time.time()-end)/(i+1)
+        print('batch {}\tbatch time: {}\tavg batch time: {}'.format(i, batch_time, avg_batch_time))
+        
+        batch_start = time.time()
     
+    epoch_end = time.time()
     print('epoch {} with {} batches take {} sec'.format(epoch, i, time.time()-end))
+    if args.kuber_profiling:
+        with open('kuber_profiling.txt', 'a') as f:
+            f.write('{}\t{}\t{}\t{}\t{}\n'.format(args.arch, args.batch_size, epoch, i, epoch_end-epoch_start))
 
 
 def validate(val_loader, model, criterion, args):

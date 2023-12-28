@@ -1,10 +1,12 @@
 # https://github.com/pytorch/examples/blob/6ab697cbaaa164b6eca551e8e8428dfa3b1d1e4b/imagenet/main.py
+import time
+
+program_start = time.time()
 
 import argparse
 import os
 import random
 import shutil
-import time
 import warnings
 import minio
 import mlock
@@ -90,6 +92,8 @@ parser.add_argument('--gpu-count', default=1, type=int,
                     help='number of GPUs to use.')
 parser.add_argument('--profile-batches', default=10, type=int,
                     help='How many batches to run in order to profile the performance data')
+parser.add_argument('--kuber-profiling', default=False, type=bool,
+                    metavar='KUBER_PROFILING', help='profile for kubernetes')
 parser.add_argument('--multiprocessing-distributed', action='store_true',
                     help='Use multi-processing distributed training to launch '
                          'N processes per node, which has N GPUs. This is the '
@@ -312,10 +316,7 @@ def main_worker(gpu, ngpus_per_node, args):
         validate(val_loader, model, criterion, args)
         return
 
-    if not os.path.exists(args.gpu_type):
-        os.makedirs(args.gpu_type)
-    with open("{}/{}-batch{}.csv".format(args.gpu_type, args.arch, args.batch_size), 'w') as f:
-        f.write("data_stall_time\tcpu2gpu_time\tgpu_time\n")
+    print("---- initialization takes {} seconds".format(time.time() - program_start))
 
     for epoch in range(args.start_epoch, args.epochs):
         if args.distributed:
@@ -450,7 +451,11 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
             balloon.set_used(False)
     
     epoch_end = time.time()
-    print("epoch {} takes {} seconds".format(epoch, epoch_end-epoch_start))
+    print("epoch {} for {} batches takes {} seconds".format(epoch, i, epoch_end-epoch_start))
+
+    if args.kuber_profiling:
+        with open('kuber_profiling.txt', 'a') as f:
+            f.write('{}\t{}\t{}\t{}\t{}\n'.format(args.arch, args.batch_size, epoch, i, epoch_end-epoch_start))
 
     
 

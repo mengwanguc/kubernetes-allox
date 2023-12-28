@@ -77,13 +77,15 @@ kubectl get namespaces --show-labels
 # custom docker images
 
 DOCKER_BUILDKIT=1 sudo docker build -t wangm12/gpemu-pytorch:base .
-sudo docker run --ulimit memlock=-1:-1 -it gpemu-pytorch:base /bin/bash
+sudo docker run --ulimit memlock=-1:-1 -it wangm12/gpemu-pytorch:base /bin/bash
 
 sudo docker push wangm12/gpemu-pytorch:base
 
 
 DOCKER_BUILDKIT=1 sudo docker build -t wangm12/gpemu-pytorch:egpu .
 sudo docker push wangm12/gpemu-pytorch:egpu
+
+sudo docker run --ulimit memlock=-1:-1 -v /data:/data --shm-size=10g -it wangm12/gpemu-pytorch:egpu /bin/bash
 
 
 kubectl logs pytorch-egpu -n user1
@@ -93,12 +95,14 @@ kubectl exec --stdin --tty pytorch-egpu -n user1 -- /bin/bash
 DOCKER_BUILDKIT=1 sudo docker build -t wangm12/gpemu-pytorch:cpu .
 sudo docker push wangm12/gpemu-pytorch:cpu
 
+sudo docker run --ulimit memlock=-1:-1 -v /data:/data --shm-size=10g -it wangm12/gpemu-pytorch:cpu /bin/bash
+
 kubectl logs pytorch-cpu -n user1
-kubectl exec --stdin --tty pytorch-egpu -n user1 -- /bin/bash
+kubectl exec --stdin --tty pytorch-cpu -n user1 -- /bin/bash
 
 
-
-kubectl logs my-scheduler-96649cb67-z6mrz  -n kube-system
+kubectl get pods --all-namespaces
+kubectl logs my-scheduler-96649cb67-bnp2q  -n kube-system
 
 ## Reserve CPU/memory resources
 

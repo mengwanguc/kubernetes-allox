@@ -1,10 +1,13 @@
 # https://github.com/pytorch/examples/blob/6ab697cbaaa164b6eca551e8e8428dfa3b1d1e4b/imagenet/main.py
+import time
+
+program_start = time.time()
 
 import argparse
 import os
 import random
 import shutil
-import time
+
 import warnings
 
 import torch
@@ -76,6 +79,8 @@ parser.add_argument('--multiprocessing-distributed', action='store_true',
                          'N processes per node, which has N GPUs. This is the '
                          'fastest way to use PyTorch for either single node or '
                          'multi node data parallel training')
+parser.add_argument('--kuber-profiling', default=False, type=bool,
+                    metavar='KUBER_PROFILING', help='profile for kubernetes')
 
 best_acc1 = 0
 
@@ -243,6 +248,8 @@ def main_worker(gpu, ngpus_per_node, args):
         validate(val_loader, model, criterion, args)
         return
 
+    print("---- initialization takes {} seconds".format(time.time() - program_start))
+
     for epoch in range(args.start_epoch, args.epochs):
         if args.distributed:
             train_sampler.set_epoch(epoch)
@@ -320,6 +327,9 @@ def train(train_loader, model, criterion, optimizer, epoch, args):
             print('batch {}  avg batch time: {}'.format(i, (time.time()-end)/(i+1)))
     
     print('epoch {} with {} batches take {} sec'.format(epoch, i, time.time()-end))
+    if args.kuber_profiling:
+        with open('kuber_profiling.txt', 'a') as f:
+            f.write('{}\t{}\t{}\t{}\t{}\n'.format(args.arch, args.batch_size, epoch, i, epoch_end-epoch_start))
 
 
 def validate(val_loader, model, criterion, args):
