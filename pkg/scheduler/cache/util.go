@@ -53,6 +53,7 @@ var USING_FIFO = false
 
 const NUM_RESERVE_CPU_NODE = 1 //for master
 const MASTER_CPU_CORES = 20    //for master
+// const MASTER_CPU_CORES = 96    //for master
 
 var QUEUED_UP_JOBS = 1 //
 var AlloX_DEBUG = true
@@ -456,6 +457,8 @@ func GetAllocatableResource() *Resource {
 func GetResourceUsageByNamespace(ns string) *Resource {
 	result, allPods := GetRealResourceUsageByNamespace(ns)
 
+	// glog.Infof("  [meng] RealResourceUsageByNamespace  allpods: %v", allPods)
+
 	if false {
 		for _, item := range schedPodQueue.List() {
 			pod := item.(*v1.Pod)
@@ -505,11 +508,14 @@ func DeletePodFromCache(p *v1.Pod) {
 
 func GetRealResourceUsageByNamespace(ns string) (*Resource, []*v1.Pod) {
 	result := &Resource{MilliCPU: 0, ScalarResources: map[v1.ResourceName]int64{NvidiaGPU: 0}, Memory: 0}
+	
 	if len(nodes) == 0 || len(NodeNameToInfo) == 0 {
 		return result, nil
 	}
 
 	allPods := make([]*v1.Pod, 0)
+	resultPods := make([]*v1.Pod, 0)
+
 	for _, node := range nodes {
 		// count the scheduled pods.
 		pods := NodeNameToInfo[node.Name].Pods()
@@ -520,11 +526,13 @@ func GetRealResourceUsageByNamespace(ns string) (*Resource, []*v1.Pod) {
 					for _, container := range pod.Spec.Containers {
 						result = SumResource(result, container.Resources.Requests, false)
 					}
+					resultPods = append(resultPods, pod)
 				}
 			}
 		}
 	}
-	// glog.Infof("[tanle] GetRealResourceUsageByNamespace %v:%v", ns, result)
+
+	glog.Infof("  [meng] GetRealResourceUsageByNamespace result pods: %v", resultPods)
 	return result, allPods
 }
 
@@ -779,64 +787,64 @@ func SubmitOnOtherDevice(client clientset.Interface, pod *v1.Pod, replicatedPod 
 	// }
 }
 
-func CreatePodOnOtherDevice_bk(pod *v1.Pod, toBeGPU bool) (*v1.Pod, bool) {
-	// check the device of the pod
-	for _, container := range pod.Spec.Containers {
-		if strings.Contains(container.Image, "gpu") && toBeGPU {
-			return pod, false
-		}
-		if strings.Contains(container.Image, "cpu") && !toBeGPU {
-			return pod, false
-		}
-	}
+// func CreatePodOnOtherDevice_bk(pod *v1.Pod, toBeGPU bool) (*v1.Pod, bool) {
+// 	// check the device of the pod
+// 	for _, container := range pod.Spec.Containers {
+// 		if strings.Contains(container.Image, "gpu") && toBeGPU {
+// 			return pod, false
+// 		}
+// 		if strings.Contains(container.Image, "cpu") && !toBeGPU {
+// 			return pod, false
+// 		}
+// 	}
 
-	// replicatedPod := pod.DeepCopy()
-	for cName, container := range pod.Spec.Containers {
-		if toBeGPU {
-			container.Image = "lenhattan86/ira:gpu"
-		} else {
-			container.Image = "lenhattan86/ira:cpu"
-		}
-		// switch commands
-		mainCmd := container.Command[3]
-		container.Command[3] = container.Command[2]
-		container.Command[2] = mainCmd
-		// switch demands
-		mainDemand := container.Command[5]
-		container.Command[5] = container.Command[4]
-		container.Command[4] = mainDemand
+// 	// replicatedPod := pod.DeepCopy()
+// 	for cName, container := range pod.Spec.Containers {
+// 		if toBeGPU {
+// 			container.Image = "wangm12/gpemu-pytorch:egpu"
+// 		} else {
+// 			container.Image = "wangm12/gpemu-pytorch:cpu"
+// 		}
+// 		// switch commands
+// 		mainCmd := container.Command[3]
+// 		container.Command[3] = container.Command[2]
+// 		container.Command[2] = mainCmd
+// 		// switch demands
+// 		mainDemand := container.Command[5]
+// 		container.Command[5] = container.Command[4]
+// 		container.Command[4] = mainDemand
 
-		cpuDemand, gpuDemand, memory := GetSecondaryDemand(pod)
+// 		cpuDemand, gpuDemand, memory := GetSecondaryDemand(pod)
 
-		for rName := range container.Resources.Requests {
-			quantity := container.Resources.Requests[rName]
-			switch rName {
-			case v1.ResourceCPU:
-				quantity.SetMilli(cpuDemand)
-			case NvidiaGPU:
-				if ENABLE_MOCKUP_GPU {
-					quantity.Set(0)
-				} else {
-					quantity.Set(gpuDemand)
-				}
-			case v1.ResourceMemory:
-				quantity.Set(memory * GI)
-			}
-			container.Resources.Requests[rName] = quantity
-			container.Resources.Limits[rName] = quantity
-		}
-		pod.Spec.Containers[cName] = container
-	}
+// 		for rName := range container.Resources.Requests {
+// 			quantity := container.Resources.Requests[rName]
+// 			switch rName {
+// 			case v1.ResourceCPU:
+// 				quantity.SetMilli(cpuDemand)
+// 			case NvidiaGPU:
+// 				if ENABLE_MOCKUP_GPU {
+// 					quantity.Set(0)
+// 				} else {
+// 					quantity.Set(gpuDemand)
+// 				}
+// 			case v1.ResourceMemory:
+// 				quantity.Set(memory * GI)
+// 			}
+// 			container.Resources.Requests[rName] = quantity
+// 			container.Resources.Limits[rName] = quantity
+// 		}
+// 		pod.Spec.Containers[cName] = container
+// 	}
 
-	// replicatedPod.ResourceVersion = ""
-	// replicatedPod.Spec.NodeName = ""
-	// replicatedPod.Annotations = nil
-	// replicatedPod.ResourceVersion = pod.ResourceVersion
-	// replicatedPod.Spec.NodeName = pod.Spec.NodeName
-	// replicatedPod.Annotations = pod.Annotations
+// 	// replicatedPod.ResourceVersion = ""
+// 	// replicatedPod.Spec.NodeName = ""
+// 	// replicatedPod.Annotations = nil
+// 	// replicatedPod.ResourceVersion = pod.ResourceVersion
+// 	// replicatedPod.Spec.NodeName = pod.Spec.NodeName
+// 	// replicatedPod.Annotations = pod.Annotations
 
-	return pod, true
-}
+// 	return pod, true
+// }
 
 /* 
 Meng's understanding:
@@ -869,9 +877,9 @@ func CreatePodOnOtherDevice(pod *v1.Pod, toBeGPU bool) (*v1.Pod, bool) {
 	replicatedPod := pod.DeepCopy()
 	for cName, container := range replicatedPod.Spec.Containers {
 		if toBeGPU {
-			container.Image = "lenhattan86/ira:gpu"
+			container.Image = "wangm12/gpemu-pytorch:egpu"
 		} else {
-			container.Image = "lenhattan86/ira:cpu"
+			container.Image = "wangm12/gpemu-pytorch:cpu"
 		}
 		// switch commands
 		mainCmd := container.Command[3]
@@ -883,6 +891,9 @@ func CreatePodOnOtherDevice(pod *v1.Pod, toBeGPU bool) (*v1.Pod, bool) {
 		container.Command[4] = mainDemand
 
 		cpuDemand, gpuDemand, memory := GetSecondaryDemand(pod)
+
+		glog.Infof("    Done creating pod on another device. New cpuDemand: %v, gpuDemand: %v, memory: %v", 
+						cpuDemand, gpuDemand, memory)
 
 		for rName := range container.Resources.Requests {
 			quantity := container.Resources.Requests[rName]
@@ -924,6 +935,7 @@ func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 	resourceMap := make(map[string]*Resource)
 	for _, user := range users {
 		resourceMap[user] = GetResourceUsageByNamespace(user)
+		glog.Infof("[meng] user: %v  sourcemap: %v", user, resourceMap[user])
 	}
 
 	var pod *v1.Pod
@@ -1001,10 +1013,13 @@ func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 			}
 		}
 
+		glog.Infof("[meng] minUser: %v  minCpuUsage: %v cpuShare: %v", minUser, minCpuUsage, cpuShare)
+
 		// static allocation
 		if minCpuUsage/int64((CPU_DEMAND_PER_JOB-1)*1000) < roundCPUShare {
 			// glog.Infof("[tanle] pick user: %v", minUser)
 			// pick the pod with the shortest CPU complt.
+			glog.Infof("[meng] USING_FIFO: %v", USING_FIFO)
 			if USING_FIFO {
 				for _, p := range allPods {
 					if minUser == p.Namespace {
@@ -1017,6 +1032,7 @@ func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 				shortestCPUComplt := int64(math.MaxInt64)
 				for _, p := range allPods {
 					complTime := GetCpuComplTime(p)
+					glog.Infof("[meng] GetCpuComplTime: %v", complTime)
 					if minUser == p.Namespace && GetCpuComplTime(p) < shortestCPUComplt {
 						pod = p
 						shortestCPUComplt = complTime
@@ -1033,6 +1049,7 @@ func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 		}
 	}
 
+	glog.Infof("    ops! Equalshare returns nil!")
 	return nil
 }
 

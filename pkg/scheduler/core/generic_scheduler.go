@@ -387,9 +387,9 @@ func CreatePodOnOtherDevice(pod *v1.Pod) *v1.Pod {
 
 	for cName, container := range replicatedPod.Spec.Containers {
 		if toBeGPU {
-			container.Image = "lenhattan86/ira:gpu"
+			container.Image = "wangm12/gpemu-pytorch:egpu"
 		} else {
-			container.Image = "lenhattan86/ira:cpu"
+			container.Image = "wangm12/gpemu-pytorch:cpu"
 		}
 		// switch commands
 		mainCmd := container.Command[3]

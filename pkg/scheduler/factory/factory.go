@@ -839,9 +839,9 @@ func (c *configFactory) replicatePod(pod *v1.Pod, isGPU bool) {
 			isGpuJob = true
 		}
 		if isGPU {
-			container.Image = "lenhattan86/ira:gpu"
+			container.Image = "wangm12/gpemu-pytorch:egpu"
 		} else {
-			container.Image = "lenhattan86/ira:cpu"
+			container.Image = "wangm12/gpemu-pytorch:cpu"
 		}
 		mainCmd := container.Command[2]
 		secCmd := container.Command[3]
@@ -968,9 +968,9 @@ func (c *configFactory) switchPod(pod *v1.Pod) {
 
 	for cName, container := range replicatedPod.Spec.Containers {
 		if toBeGPU {
-			container.Image = "lenhattan86/ira:gpu"
+			container.Image = "wangm12/gpemu-pytorch:egpu"
 		} else {
-			container.Image = "lenhattan86/ira:cpu"
+			container.Image = "wangm12/gpemu-pytorch:cpu"
 		}
 		mainCmd := container.Command[3]
 		container.Command[3] = container.Command[2]
