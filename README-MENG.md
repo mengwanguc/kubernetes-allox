@@ -39,6 +39,34 @@ website/content/en/examples/admin/sched/my-scheduler.yaml
 
 https://stackoverflow.com/questions/37586169/creating-custom-scheduler-doesnt-work
 
+
+```
+kubectl edit clusterrole system:kube-scheduler
+```
+```
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - storageclasses
+  verbs:
+  - watch
+  - list
+  - get
+```
+for resource pod add create permission:
+```
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - delete
+  - get
+  - list
+  - watch
+  - create
+```
+
 ```
 cd kubernetes-allox
 make
@@ -54,10 +82,13 @@ kubectl get pods --all-namespaces
 
 ```
 kubectl describe pod my-scheduler-5dbbfd997f-p6bhs -n kube-system
-kubectl logs my-scheduler-96649cb67-z6mrz  -n kube-system
+kubectl logs my-scheduler-96649cb67-hv7xp  -n kube-system
 kubectl logs pytorch-egpu -n user1
 kubectl describe pod pytorch-egpu -n user1
 kubectl exec --stdin --tty pytorch-egpu -n user1 -- /bin/bash
+
+kubectl logs pytorch-cpu -n user1
+kubectl describe pod pytorch-cpu -n user1
 ```
 
 Force Kubernetes to pull image: https://www.baeldung.com/ops/kubernetes-pull-image-again#:~:text=One%20way%20to%20force%20Kubernetes,already%20present%20on%20the%20node.
@@ -102,7 +133,7 @@ kubectl exec --stdin --tty pytorch-cpu -n user1 -- /bin/bash
 
 
 kubectl get pods --all-namespaces
-kubectl logs my-scheduler-96649cb67-bnp2q  -n kube-system
+kubectl logs my-scheduler-96649cb67-x8rl7  -n kube-system
 
 ## Reserve CPU/memory resources
 

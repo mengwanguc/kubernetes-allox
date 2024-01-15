@@ -80,6 +80,9 @@ var (
 	maxPDVolumeCountPredicateKeys = []string{predicates.MaxGCEPDVolumeCountPred, predicates.MaxAzureDiskVolumeCountPred, predicates.MaxEBSVolumeCountPred}
 	podStartTimes                 = make(map[string]time.Time)     //tanle
 	podStopTimes                  = make(map[string]time.Duration) //tanle
+	jcts						  = []time.Duration{}
+	total_jct 					  time.Duration
+
 )
 
 // configFactory is the default implementation of the scheduler.Configurator interface.
@@ -798,6 +801,13 @@ func (f *configFactory) computeComplTimeForAllPods(isCompleted bool) {
 					podStopTimes[pod.Name] = time.Since(podStartTimes[pod.Name])
 					// fmt.Println(" %v", podStopTimes)
 					glog.Infof("[tanle] Event pod completed %v/%s", pod.Namespace, pod.Name, pod.Status.Phase)
+					jct := time.Since(schedulercache.SCHEDULE_START)
+					jcts = append(jcts, jct)
+					total_jct += jct
+					average_jct := total_jct / time.Duration(len(jcts))
+					glog.Infof("[meng] %v, %v run time: %v, JCT: %v, total jct: %v, count: %v, average JCT: %v", 
+								pod.Namespace, pod.Name, podStopTimes[pod.Name], jct, total_jct, len(jcts), average_jct)
+
 					schedulercache.UpdateFairScore(&pod, false)
 					schedulercache.DeletePodFromCache(&pod)
 				}
@@ -810,6 +820,7 @@ func (f *configFactory) computeComplTimeForAllPods(isCompleted bool) {
 		}
 	} else {
 		glog.Errorf("[tanle] error %v", err)
+		glog.Infof("[meng] error %v", err)
 	}
 }
 
@@ -1114,6 +1125,8 @@ func (c *configFactory) invalidateCachedPredicatesOnUpdatePod(newPod *v1.Pod, ol
 }
 
 func (c *configFactory) deletePodFromCache(obj interface{}) {
+
+	glog.Infof("[meng] deletePodFromCache")
 
 	if LogComplTimeFeature {
 		c.computeComplTimeForAllPods(true)
@@ -1605,7 +1618,7 @@ func (c *configFactory) getPluginArgs() (*PluginFactoryArgs, error) {
 
 func (c *configFactory) getNextPod() *v1.Pod {
 	if schedulercache.ENABLE_ONLINE_SCHEDULER {
-		glog.Infof("[meng] getNextPod()")
+		// glog.Infof("[meng] getNextPod()")
 		if pod := c.podQueue.PickNextPod(c.GetClient()); pod != nil {
 			return pod
 		} else {

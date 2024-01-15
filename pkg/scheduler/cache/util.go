@@ -40,7 +40,7 @@ import (
 ///// Implemenation for AlloX /////
 
 /*************** IMPORTANT PARAMETERs *******************/
-const SCHEDULER = ES
+const SCHEDULER = DRF
 const AlphaFair = 0.5 //
 const NUM_USERS = 3
 const SCHEDULER_PERIOD = 100 // Miliseconds
@@ -49,13 +49,16 @@ const AVG_BETA = 95.0 * MILLI // based on simulator.
 
 var ENABLE_PROFILING = true
 
+var SCHEDULE_START = time.Time{}
+
+
 var USING_FIFO = false
 
 const NUM_RESERVE_CPU_NODE = 1 //for master
 const MASTER_CPU_CORES = 20    //for master
 // const MASTER_CPU_CORES = 96    //for master
 
-var QUEUED_UP_JOBS = 1 //
+var QUEUED_UP_JOBS = 10 //
 var AlloX_DEBUG = true
 
 // TODO: WORK AROUND  = break deadlock at begginning.
@@ -312,9 +315,9 @@ func InitParameters() {
 }
 
 func SynClusterInfo(nn map[string]*NodeInfo, n []*v1.Node) {
-	glog.Infof("[meng] SynClusterInfo %v", CAPACITY)
-	glog.Infof("[meng] SynClusterInfo nodeinfo nn len %v", len(nn))
-	glog.Infof("[meng] SynClusterInfo nodes n len: %v", len(n))
+	// glog.Infof("[meng] SynClusterInfo %v", CAPACITY)
+	// glog.Infof("[meng] SynClusterInfo nodeinfo nn len %v", len(nn))
+	// glog.Infof("[meng] SynClusterInfo nodes n len: %v", len(n))
 	if nn != nil {
 		NodeNameToInfo = nn
 	}
@@ -532,7 +535,7 @@ func GetRealResourceUsageByNamespace(ns string) (*Resource, []*v1.Pod) {
 		}
 	}
 
-	glog.Infof("  [meng] GetRealResourceUsageByNamespace result pods: %v", resultPods)
+	// glog.Infof("  [meng] GetRealResourceUsageByNamespace result pods: %v", resultPods)
 	return result, allPods
 }
 
@@ -643,7 +646,7 @@ func GetDemand(pod *v1.Pod, isGpu bool) (int64, int64, int64) {
 	for _, container := range pod.Spec.Containers {
 		cmdIdx := 4
 
-		glog.Infof("[meng] Calling GetDemand!!!!!! isGpu: %v, container.Image: %v", isGpu, container.Image)
+		// glog.Infof("[meng] Calling GetDemand!!!!!! isGpu: %v, container.Image: %v", isGpu, container.Image)
 		if isGpu && strings.Contains(container.Image, "gpu") {
 			cmdIdx = 4 // primary
 		} else {
@@ -653,7 +656,7 @@ func GetDemand(pod *v1.Pod, isGpu bool) (int64, int64, int64) {
 		// switch demands
 		secDemand := container.Command[cmdIdx]
 
-		glog.Infof("[meng] GetDemand cmdIdx: %v, demand: %v", cmdIdx, secDemand)
+		// glog.Infof("[meng] GetDemand cmdIdx: %v, demand: %v", cmdIdx, secDemand)
 
 		strDemands := strings.Split(secDemand, ",")
 		cpuDemand, err := strconv.ParseInt(strDemands[0], 10, 64)
@@ -682,10 +685,10 @@ func GetGpuComplTime(pod *v1.Pod) int64 {
 	cmdIdx := 4
 	for _, container := range pod.Spec.Containers {
 		// switch demands
-		glog.Infof("    container commands: %v", container.Command)
-		for i, c := range container.Command {
-			glog.Infof("       %v: each commnad: %v", i, c)
-		}
+		// glog.Infof("    container commands: %v", container.Command)
+		// for i, c := range container.Command {
+		// 	// glog.Infof("       %v: each commnad: %v", i, c)
+		// }
 		if strings.Contains(container.Image, "gpu") {
 			cmdIdx = 4 // primary
 		} else {
@@ -860,12 +863,15 @@ What I don't understand:
   Why use GetSecondaryDemand after the switch?
   After the switch, the primary command is now for the new compute unit (CPU).
   So we should just use the primary command.
+--
+  Now I understand:
+  It's getting secondary of pod, not replicated pod
 
 */
 func CreatePodOnOtherDevice(pod *v1.Pod, toBeGPU bool) (*v1.Pod, bool) {
 	// check the device of the pod
 	for _, container := range pod.Spec.Containers {
-		glog.Infof("    CreatePodOnOtherDevice container image: %v", container.Image)
+		// glog.Infof("    CreatePodOnOtherDevice container image: %v", container.Image)
 		if strings.Contains(container.Image, "gpu") && toBeGPU {
 			return pod, false
 		}

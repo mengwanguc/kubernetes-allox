@@ -140,7 +140,7 @@ func (cache *schedulerCache) Snapshot() *Snapshot {
 }
 
 func (cache *schedulerCache) UpdateNodeNameToInfoMap(nodeNameToInfo map[string]*NodeInfo) error {
-	glog.Infof("[meng] Updating UpdateNodeNameToInfoMap")
+	// glog.Infof("[meng] Updating UpdateNodeNameToInfoMap")
 
 	cache.mu.Lock()
 	defer cache.mu.Unlock()

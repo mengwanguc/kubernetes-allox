@@ -6,9 +6,9 @@ pwd
 
 ls /edev
 
-print_interval=60
-while true
-do
-  echo "This message is printed every $print_interval second."
-  sleep $print_interval  # Sleep for 5 second
-done
+third_argument="$3"
+extracted_value="${third_argument##*,}"
+
+echo $extracted_value
+sleep $extracted_value
+echo "finished"

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pytorch-egpu
+  name: pytorch-googlenet
   namespace: user1
 spec:
   schedulerName: my-scheduler
@@ -22,8 +22,8 @@ spec:
     - /app/self-check.sh
     - hi1
     - hi2
-    - 20000,1,20,100
-    - 90000,0,20,200
+    - 20000,1,20,8
+    - 90000,0,20,51
     - '1000'
     volumeMounts:
     - mountPath: /data

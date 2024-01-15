@@ -450,7 +450,7 @@ func (g *genericScheduler) placeOnOtherDevice(pod *v1.Pod, replicatedPod *v1.Pod
 // If it succeeds, it will return the name of the node.
 // If it fails, it will return a FitError error with reasons.
 func (g *genericScheduler) SynClusterInfo(nodeLister algorithm.NodeLister) {
-	glog.Infof("[meng] genericScheduler Sync cluster info")
+	// glog.Infof("[meng] genericScheduler Sync cluster info")
 
 	nodes, err := nodeLister.List()
 	if err != nil {
@@ -461,7 +461,7 @@ func (g *genericScheduler) SynClusterInfo(nodeLister algorithm.NodeLister) {
 }
 
 func (g *genericScheduler) Schedule(pod *v1.Pod, nodeLister algorithm.NodeLister) (string, error) {
-	glog.Infof("[meng] Scheduling %s/%s", pod.Namespace, pod.Name)
+	// glog.Infof("[meng] Scheduling %s/%s", pod.Namespace, pod.Name)
 
 	trace := utiltrace.New(fmt.Sprintf("Scheduling %s/%s", pod.Namespace, pod.Name))
 	defer trace.LogIfLong(100 * time.Millisecond)

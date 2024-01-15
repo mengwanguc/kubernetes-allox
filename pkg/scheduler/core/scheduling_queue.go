@@ -188,6 +188,10 @@ func (f *FIFO) PickNextPod(client clientset.Interface) *v1.Pod { // tanle
 			}
 
 			if START_SCHEDULING && len(allPods) > 0 {
+				if schedulercache.SCHEDULE_START.IsZero() {
+					schedulercache.SCHEDULE_START = time.Now()
+					glog.Infof("[meng] set schedule time to %v", schedulercache.SCHEDULE_START)
+				}
 				switch schedulercache.SCHEDULER {
 				case schedulercache.ES:
 					pod = schedulercache.EqualShare(allPods, client)
