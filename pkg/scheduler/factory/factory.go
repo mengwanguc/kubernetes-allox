@@ -801,13 +801,6 @@ func (f *configFactory) computeComplTimeForAllPods(isCompleted bool) {
 					podStopTimes[pod.Name] = time.Since(podStartTimes[pod.Name])
 					// fmt.Println(" %v", podStopTimes)
 					glog.Infof("[tanle] Event pod completed %v/%s", pod.Namespace, pod.Name, pod.Status.Phase)
-					jct := time.Since(schedulercache.SCHEDULE_START)
-					jcts = append(jcts, jct)
-					total_jct += jct
-					average_jct := total_jct / time.Duration(len(jcts))
-					glog.Infof("[meng] %v, %v run time: %v, JCT: %v, total jct: %v, count: %v, average JCT: %v", 
-								pod.Namespace, pod.Name, podStopTimes[pod.Name], jct, total_jct, len(jcts), average_jct)
-
 					schedulercache.UpdateFairScore(&pod, false)
 					schedulercache.DeletePodFromCache(&pod)
 				}
@@ -1127,6 +1120,16 @@ func (c *configFactory) invalidateCachedPredicatesOnUpdatePod(newPod *v1.Pod, ol
 func (c *configFactory) deletePodFromCache(obj interface{}) {
 
 	glog.Infof("[meng] deletePodFromCache")
+
+	if !schedulercache.SCHEDULE_START.IsZero() {
+		jct := time.Since(schedulercache.SCHEDULE_START)
+		jcts = append(jcts, jct)
+		total_jct += jct
+		average_jct := total_jct / time.Duration(len(jcts))
+		glog.Infof("[meng] JCT: %v, total jct: %v, count: %v, average JCT: %v", 
+					jct, total_jct, len(jcts), average_jct)
+	}
+	
 
 	if LogComplTimeFeature {
 		c.computeComplTimeForAllPods(true)

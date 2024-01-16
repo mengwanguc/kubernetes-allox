@@ -456,7 +456,7 @@ func (sched *Scheduler) scheduleOne() {
 		// preempt, with the expectation that the next time the pod is tried for scheduling it
 		// will fit due to the preemption. It is also possible that a different pod will schedule
 		// into the resources that were preempted, but this is harmless.
-		// glog.Infof("[meng] sched.schedule(pod) has error: %v/%v, %v", pod.Namespace, pod.Name, err)
+		glog.Infof("[meng] sched.schedule(pod) has error: %v/%v, %v", pod.Namespace, pod.Name, err)
 		if fitError, ok := err.(*core.FitError); ok {
 			preemptionStartTime := time.Now()
 			sched.preempt(pod, fitError)

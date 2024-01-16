@@ -9,7 +9,7 @@ spec:
   containers:
   - name: pytorch-egpu-ctr
     image: wangm12/gpemu-pytorch:egpu
-    imagePullPolicy: Always
+    # imagePullPolicy: Always
     resources:
       requests:
         ucare.cs.uchicago.edu/e-gpu: 1

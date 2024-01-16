@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pytorch-mobilenet
-  namespace: user1
+  name: pytorch-lenet-5
+  namespace: user3
 spec:
   schedulerName: my-scheduler
   restartPolicy: OnFailure
@@ -22,8 +22,8 @@ spec:
     - /app/self-check.sh
     - hi1
     - hi2
-    - 20000,1,20,13
-    - 90000,0,20,103
+    - 20000,1,20,21
+    - 90000,0,20,27
     - '1000'
     volumeMounts:
     - mountPath: /data

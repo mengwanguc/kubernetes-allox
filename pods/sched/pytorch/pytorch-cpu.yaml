@@ -9,7 +9,7 @@ spec:
   containers:
   - name: pytorch-cpu-ctr
     image: wangm12/gpemu-pytorch:cpu
-    imagePullPolicy: Always
+    # imagePullPolicy: Always
     resources:
       requests:
         cpu: "20000m" # 20 CPUs

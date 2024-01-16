@@ -1,0 +1,192 @@
+W0116 03:30:41.074502       1 options.go:272] Neither --kubeconfig nor --master was specified. Using default API client. This might not work.
+I0116 03:30:41.077168       1 server.go:128] Version: v0.0.0-master+$Format:%h$
+W0116 03:30:41.077425       1 defaults.go:207] TaintNodesByCondition is enabled, PodToleratesNodeTaints predicate is mandatory
+I0116 03:30:41.078020       1 factory.go:1512] [tanle] LogComplTimeFeature %!s(bool=true)
+I0116 03:30:41.078038       1 generic_scheduler.go:1830] version 1.11: 2018.10.29 4:00 EUROSYS1.3
+I0116 03:30:41.078045       1 generic_scheduler.go:1832] ENABLE_PROFILING true
+I0116 03:30:41.078051       1 generic_scheduler.go:1834] ============= IRA =============
+I0116 03:30:41.078058       1 generic_scheduler.go:1835] IS_TEST: false
+I0116 03:30:41.078064       1 generic_scheduler.go:1836] QUEUED_UP_JOBS: 40
+I0116 03:30:41.078070       1 generic_scheduler.go:1837] NUM_USERS: 4
+I0116 03:30:41.078077       1 generic_scheduler.go:1838] SCHEDULER AlloX
+I0116 03:30:41.078083       1 generic_scheduler.go:1839] NUM_RESERVE_CPU_NODE %!s(int=1)
+I0116 03:30:41.078091       1 generic_scheduler.go:1840] ENABLE_MOCKUP_GPU %!s(bool=false)
+I0116 03:30:41.078102       1 util.go:362] [tanle] WORK around capacity &{176000 68719476736 0 0 map[ucare.cs.uchicago.edu/e-gpu:4]}
+W0116 03:30:41.078856       1 authorization.go:47] Authorization is disabled
+W0116 03:30:41.078867       1 authentication.go:55] Authentication is disabled
+I0116 03:30:41.078877       1 deprecated_insecure_serving.go:48] Serving healthz insecurely on [::]:10251
+I0116 03:30:41.979745       1 controller_utils.go:1027] Waiting for caches to sync for scheduler controller
+I0116 03:30:42.079854       1 controller_utils.go:1034] Caches are synced for scheduler controller
+I0116 03:30:48.885925       1 scheduling_queue.go:193] [meng] set schedule time to 2024-01-16 03:30:48.885909012 +0000 UTC m=+7.869969825
+I0116 03:30:48.887131       1 util.go:1619] input  D: [[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0] [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]]
+I0116 03:30:48.887308       1 util.go:1620] input  P: [[14 13 8 21 21 13 28 9 14 10 28 9 10 13 13 10 21 7 9 8 7 21 14 8 10 28 7 21 21 13 21 8 21 9 7 28 13 14 13 13] [14 13 8 21 21 13 28 9 14 10 28 9 10 13 13 10 21 7 9 8 7 21 14 8 10 28 7 21 21 13 21 8 21 9 7 28 13 14 13 13] [14 13 8 21 21 13 28 9 14 10 28 9 10 13 13 10 21 7 9 8 7 21 14 8 10 28 7 21 21 13 21 8 21 9 7 28 13 14 13 13] [14 13 8 21 21 13 28 9 14 10 28 9 10 13 13 10 21 7 9 8 7 21 14 8 10 28 7 21 21 13 21 8 21 9 7 28 13 14 13 13] [18 103 51 27 27 103 36 49 18 57 36 49 57 103 62 57 27 9 49 51 9 27 18 51 57 36 9 27 27 62 27 51 27 49 9 36 62 18 62 103] [18 103 51 27 27 103 36 49 18 57 36 49 57 103 62 57 27 9 49 51 9 27 18 51 57 36 9 27 27 62 27 51 27 49 9 36 62 18 62 103] [18 103 51 27 27 103 36 49 18 57 36 49 57 103 62 57 27 9 49 51 9 27 18 51 57 36 9 27 27 62 27 51 27 49 9 36 62 18 62 103] [18 103 51 27 27 103 36 49 18 57 36 49 57 103 62 57 27 9 49 51 9 27 18 51 57 36 9 27 27 62 27 51 27 49 9 36 62 18 62 103] [18 103 51 27 27 103 36 49 18 57 36 49 57 103 62 57 27 9 49 51 9 27 18 51 57 36 9 27 27 62 27 51 27 49 9 36 62 18 62 103] [18 103 51 27 27 103 36 49 18 57 36 49 57 103 62 57 27 9 49 51 9 27 18 51 57 36 9 27 27 62 27 51 27 49 9 36 62 18 62 103] [18 103 51 27 27 103 36 49 18 57 36 49 57 103 62 57 27 9 49 51 9 27 18 51 57 36 9 27 27 62 27 51 27 49 9 36 62 18 62 103] [18 103 51 27 27 103 36 49 18 57 36 49 57 103 62 57 27 9 49 51 9 27 18 51 57 36 9 27 27 62 27 51 27 49 9 36 62 18 62 103] [18 103 51 27 27 103 36 49 18 57 36 49 57 103 62 57 27 9 49 51 9 27 18 51 57 36 9 27 27 62 27 51 27 49 9 36 62 18 62 103] [18 103 51 27 27 103 36 49 18 57 36 49 57 103 62 57 27 9 49 51 9 27 18 51 57 36 9 27 27 62 27 51 27 49 9 36 62 18 62 103] [18 103 51 27 27 103 36 49 18 57 36 49 57 103 62 57 27 9 49 51 9 27 18 51 57 36 9 27 27 62 27 51 27 49 9 36 62 18 62 103]]
+I0116 03:30:49.033618       1 util.go:1624] input  sols: [29 36 38 39 28 30 6 10 25 35 3 4 16 21 27 1 5 13 14 -1 -1 32 0 8 22 37 17 20 26 34 9 12 15 24 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 7 11 18 33 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 2 19 23 31 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1]
+I0116 03:30:49.034214       1 util.go:901]     Done creating pod user1/pytorch-lenet on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:30:49.041812       1 util.go:189] [tanle] FairScoreMap:  map[user2:0 user3:0 user4:0 user1:0.19444444444444445]
+I0116 03:30:49.043910       1 scheduler.go:406] [tanle] binding user1/pytorch-lenet on GPU false-->meng-allox-cpu-6
+I0116 03:30:49.268573       1 util.go:901]     Done creating pod user3/pytorch-lenet on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:30:49.275621       1 util.go:189] [tanle] FairScoreMap:  map[user3:0.19444444444444445 user4:0 user1:0.19444444444444445 user2:0]
+I0116 03:30:49.277922       1 scheduler.go:406] [tanle] binding user3/pytorch-lenet on GPU false-->meng-allox-cpu-3
+I0116 03:30:49.495501       1 util.go:901]     Done creating pod user4/pytorch-lenet on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:30:49.502905       1 util.go:189] [tanle] FairScoreMap:  map[user4:0.19444444444444445 user1:0.19444444444444445 user2:0 user3:0.19444444444444445]
+I0116 03:30:49.505401       1 scheduler.go:406] [tanle] binding user4/pytorch-lenet on GPU false-->meng-allox-cpu-4
+I0116 03:30:49.712608       1 util.go:901]     Done creating pod user2/pytorch-lenet on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:30:49.719928       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.19444444444444445 user2:0.19444444444444445 user3:0.19444444444444445 user4:0.19444444444444445]
+I0116 03:30:49.722283       1 scheduler.go:406] [tanle] binding user2/pytorch-lenet on GPU false-->meng-allox-cpu-1
+I0116 03:30:49.922479       1 util.go:901]     Done creating pod user4/pytorch-lenet-2 on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:30:49.929339       1 util.go:189] [tanle] FairScoreMap:  map[user2:0.19444444444444445 user3:0.19444444444444445 user4:0.3888888888888889 user1:0.19444444444444445]
+I0116 03:30:49.931831       1 scheduler.go:406] [tanle] binding user4/pytorch-lenet-2 on GPU false-->meng-allox-cpu-2
+I0116 03:30:50.128019       1 util.go:901]     Done creating pod user2/pytorch-lenet-2 on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:30:50.135036       1 util.go:189] [tanle] FairScoreMap:  map[user4:0.3888888888888889 user1:0.19444444444444445 user2:0.3888888888888889 user3:0.19444444444444445]
+I0116 03:30:50.137481       1 scheduler.go:406] [tanle] binding user2/pytorch-lenet-2 on GPU false-->meng-allox-cpu-7
+I0116 03:30:50.332181       1 util.go:901]     Done creating pod user3/pytorch-lenet-2 on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:30:50.339212       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.19444444444444445 user2:0.3888888888888889 user3:0.3888888888888889 user4:0.3888888888888889]
+I0116 03:30:50.341365       1 scheduler.go:406] [tanle] binding user3/pytorch-lenet-2 on GPU false-->meng-allox-cpu-5
+I0116 03:30:50.529388       1 util.go:901]     Done creating pod user1/pytorch-lenet-2 on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:30:50.536785       1 util.go:189] [tanle] FairScoreMap:  map[user4:0.3888888888888889 user1:0.3888888888888889 user2:0.3888888888888889 user3:0.3888888888888889]
+I0116 03:30:50.538757       1 scheduler.go:406] [tanle] binding user1/pytorch-lenet-2 on GPU false-->meng-allox-cpu-8
+I0116 03:30:50.717041       1 util.go:901]     Done creating pod user1/pytorch-lenet-3 on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:30:50.726056       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:50.914778       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:51.098343       1 util.go:901]     Done creating pod user4/pytorch-lenet-3 on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:30:51.109760       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user4/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:51.291959       1 util.go:901]     Done creating pod user3/pytorch-lenet-3 on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:30:51.300173       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user3/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:51.482381       1 util.go:901]     Done creating pod user2/pytorch-lenet-3 on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:30:51.490813       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:51.675553       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user3/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:51.863205       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user4/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:52.048360       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user3/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:52.234910       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user4/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:52.419682       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:52.605685       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:52.793207       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:52.977530       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:53.159921       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:53.343624       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:53.528155       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:53.712401       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user4/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:53.894647       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user3/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:54.078145       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user4/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:54.264147       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:54.447804       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user3/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:54.632084       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:54.815564       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:55.000094       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:55.184040       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:55.372224       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:55.556995       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:55.744034       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:55.925566       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:56.115113       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:56.298999       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user4/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:56.480947       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user4/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:56.665081       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:56.849373       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user4/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:57.036537       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user4/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:57.222923       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:57.406172       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:57.594277       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:57.778307       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:57.962273       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:58.147578       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:58.331002       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:58.517105       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:58.706820       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:58.895938       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:59.082412       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:59.266343       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user3/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:59.452686       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user3/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:59.636723       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user4/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:59.822708       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:30:59.939818       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:30:59.939881       1 factory.go:1129] [meng] JCT: 11.053964902s, total jct: 11.053964902s, count: 1, average JCT: 11.053964902s
+I0116 03:30:59.952772       1 factory.go:803] [tanle] Event pod completed user1/pytorch-lenet%!(EXTRA v1.PodPhase=Succeeded)
+I0116 03:30:59.952820       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.19444444444444445 user2:0.3888888888888889 user3:0.3888888888888889 user4:0.3888888888888889]
+I0116 03:31:00.008016       1 util.go:901]     Done creating pod user2/pytorch-lenet-5 on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:31:00.014588       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.19444444444444445 user2:0.5833333333333334 user3:0.3888888888888889 user4:0.3888888888888889]
+I0116 03:31:00.016404       1 scheduler.go:406] [tanle] binding user2/pytorch-lenet-5 on GPU false-->meng-allox-cpu-6
+I0116 03:31:00.190831       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user3/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:31:00.368129       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:31:00.546667       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user1/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:31:00.576722       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:00.576741       1 factory.go:1129] [meng] JCT: 11.690826138s, total jct: 22.74479104s, count: 2, average JCT: 11.37239552s
+I0116 03:31:00.725756       1 util.go:189] [tanle] FairScoreMap:  map[user2:0.5833333333333334 user3:0.3888888888888889 user4:0.3888888888888889 user1:0.3888888888888889]
+I0116 03:31:00.728405       1 scheduler.go:406] [tanle] binding user1/pytorch-lenet-3 on GPU false-->meng-allox-cpu-3
+I0116 03:31:00.845546       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:00.845582       1 factory.go:1129] [meng] JCT: 11.959664337s, total jct: 34.704455377s, count: 3, average JCT: 11.568151792s
+I0116 03:31:00.895970       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.3888888888888889 user2:0.5833333333333334 user3:0.3888888888888889 user4:0.5833333333333334]
+I0116 03:31:00.898818       1 scheduler.go:406] [tanle] binding user4/pytorch-lenet-3 on GPU false-->meng-allox-cpu-4
+I0116 03:31:01.059888       1 scheduler.go:459] [meng] sched.schedule(pod) has error: user2/pytorch-lenet-3, 0/13 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 12 Insufficient cpu.
+I0116 03:31:01.202049       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:01.202105       1 factory.go:1129] [meng] JCT: 12.316186828s, total jct: 47.020642205s, count: 4, average JCT: 11.755160551s
+I0116 03:31:01.229445       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.3888888888888889 user2:0.5833333333333334 user3:0.5833333333333334 user4:0.5833333333333334]
+I0116 03:31:01.232064       1 scheduler.go:406] [tanle] binding user3/pytorch-lenet-3 on GPU false-->meng-allox-cpu-1
+I0116 03:31:01.379607       1 util.go:189] [tanle] FairScoreMap:  map[user3:0.5833333333333334 user4:0.5833333333333334 user1:0.3888888888888889 user2:0.8333333333333334]
+I0116 03:31:01.382214       1 scheduler.go:406] [tanle] binding user2/pytorch-googlenet on GPU true-->meng-allox-egpu-4
+I0116 03:31:01.525225       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.6388888888888888 user2:0.8333333333333334 user3:0.5833333333333334 user4:0.5833333333333334]
+I0116 03:31:01.527681       1 scheduler.go:406] [tanle] binding user1/pytorch-googlenet on GPU true-->meng-allox-egpu-1
+I0116 03:31:01.665859       1 util.go:189] [tanle] FairScoreMap:  map[user4:0.8333333333333334 user1:0.6388888888888888 user2:0.8333333333333334 user3:0.5833333333333334]
+I0116 03:31:01.668437       1 scheduler.go:406] [tanle] binding user4/pytorch-googlenet on GPU true-->meng-allox-egpu-2
+I0116 03:31:01.803744       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.6388888888888888 user2:0.8333333333333334 user3:0.8333333333333334 user4:0.8333333333333334]
+I0116 03:31:01.815492       1 scheduler.go:406] [tanle] binding user3/pytorch-googlenet on GPU true-->meng-allox-egpu-3
+I0116 03:31:09.950007       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:09.950030       1 factory.go:1129] [meng] JCT: 21.064114423s, total jct: 1m8.084756628s, count: 5, average JCT: 13.616951325s
+I0116 03:31:09.961820       1 factory.go:803] [tanle] Event pod completed user4/pytorch-lenet-2%!(EXTRA v1.PodPhase=Succeeded)
+I0116 03:31:09.961849       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.6388888888888888 user2:0.8333333333333334 user3:0.8333333333333334 user4:0.638888888888889]
+I0116 03:31:10.005702       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:10.005721       1 factory.go:1129] [meng] JCT: 21.119805504s, total jct: 1m29.204562132s, count: 6, average JCT: 14.867427022s
+I0116 03:31:10.052786       1 util.go:901]     Done creating pod user3/pytorch-lenet-4 on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:31:10.060352       1 util.go:189] [tanle] FairScoreMap:  map[user4:0.638888888888889 user1:0.6388888888888888 user2:0.8333333333333334 user3:1.027777777777778]
+I0116 03:31:10.062718       1 scheduler.go:406] [tanle] binding user3/pytorch-lenet-4 on GPU false-->meng-allox-cpu-2
+I0116 03:31:10.214997       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:10.215015       1 factory.go:1129] [meng] JCT: 21.329100163s, total jct: 1m50.533662295s, count: 7, average JCT: 15.790523185s
+I0116 03:31:10.260482       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:10.260503       1 factory.go:1129] [meng] JCT: 21.374588201s, total jct: 2m11.908250496s, count: 8, average JCT: 16.488531312s
+I0116 03:31:11.142087       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:11.142121       1 factory.go:1129] [meng] JCT: 22.256203777s, total jct: 2m34.164454273s, count: 9, average JCT: 17.129383808s
+I0116 03:31:11.155771       1 factory.go:803] [tanle] Event pod completed user2/pytorch-googlenet%!(EXTRA v1.PodPhase=Succeeded)
+I0116 03:31:11.155812       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.6388888888888888 user2:0.5833333333333334 user3:1.027777777777778 user4:0.638888888888889]
+I0116 03:31:11.194440       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.6388888888888888 user2:0.5833333333333334 user3:1.027777777777778 user4:0.888888888888889]
+I0116 03:31:11.196926       1 scheduler.go:406] [tanle] binding user4/pytorch-resnet34 on GPU true-->meng-allox-egpu-4
+I0116 03:31:11.451307       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:11.451323       1 factory.go:1129] [meng] JCT: 22.565408969s, total jct: 2m56.729863242s, count: 10, average JCT: 17.672986324s
+I0116 03:31:11.776820       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:11.776853       1 factory.go:1129] [meng] JCT: 22.890938s, total jct: 3m19.620801242s, count: 11, average JCT: 18.147345567s
+I0116 03:31:12.033576       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:12.033599       1 factory.go:1129] [meng] JCT: 23.147683511s, total jct: 3m42.768484753s, count: 12, average JCT: 18.564040396s
+I0116 03:31:22.365017       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:22.365039       1 factory.go:1129] [meng] JCT: 33.479123766s, total jct: 4m16.247608519s, count: 13, average JCT: 19.711354501s
+I0116 03:31:22.380195       1 factory.go:803] [tanle] Event pod completed user4/pytorch-resnet34%!(EXTRA v1.PodPhase=Succeeded)
+I0116 03:31:22.380225       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.6388888888888888 user2:0.5833333333333334 user3:1.027777777777778 user4:0.638888888888889]
+I0116 03:31:22.442832       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.6388888888888888 user2:0.5833333333333334 user3:1.277777777777778 user4:0.638888888888889]
+I0116 03:31:22.445376       1 scheduler.go:406] [tanle] binding user3/pytorch-alexnet on GPU true-->meng-allox-egpu-4
+I0116 03:31:29.054447       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:29.054469       1 factory.go:1129] [meng] JCT: 40.168553481s, total jct: 4m56.416162s, count: 14, average JCT: 21.172583s
+I0116 03:31:29.065941       1 factory.go:803] [tanle] Event pod completed user2/pytorch-lenet-5%!(EXTRA v1.PodPhase=Succeeded)
+I0116 03:31:29.065971       1 util.go:189] [tanle] FairScoreMap:  map[user3:1.277777777777778 user4:0.638888888888889 user1:0.6388888888888888 user2:0.38888888888888895]
+I0116 03:31:29.180965       1 util.go:901]     Done creating pod user3/pytorch-lenet-5 on another device. New cpuDemand: 90000, gpuDemand: 0, memory: 20
+I0116 03:31:29.191475       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.6388888888888888 user2:0.38888888888888895 user3:1.4722222222222223 user4:0.638888888888889]
+I0116 03:31:29.193830       1 scheduler.go:406] [tanle] binding user3/pytorch-lenet-5 on GPU false-->meng-allox-cpu-8
+I0116 03:31:29.974777       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:29.974793       1 factory.go:1129] [meng] JCT: 41.088878076s, total jct: 5m37.505040076s, count: 15, average JCT: 22.500336005s
+I0116 03:31:29.988075       1 factory.go:803] [tanle] Event pod completed user1/pytorch-lenet-3%!(EXTRA v1.PodPhase=Succeeded)
+I0116 03:31:29.988119       1 util.go:189] [tanle] FairScoreMap:  map[user3:1.4722222222222223 user4:0.638888888888889 user1:0.4444444444444444 user2:0.38888888888888895]
+I0116 03:31:30.243649       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:30.243684       1 factory.go:1129] [meng] JCT: 41.357768124s, total jct: 6m18.8628082s, count: 16, average JCT: 23.678925512s
+I0116 03:31:30.942677       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:30.942715       1 factory.go:1129] [meng] JCT: 42.056797862s, total jct: 7m0.919606062s, count: 17, average JCT: 24.759976827s
+I0116 03:31:34.544019       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:34.544056       1 factory.go:1129] [meng] JCT: 45.658139196s, total jct: 7m46.577745258s, count: 18, average JCT: 25.920985847s
+I0116 03:31:34.559285       1 factory.go:803] [tanle] Event pod completed user3/pytorch-alexnet%!(EXTRA v1.PodPhase=Succeeded)
+I0116 03:31:34.559322       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.4444444444444444 user2:0.38888888888888895 user3:1.2222222222222223 user4:0.638888888888889]
+I0116 03:31:34.620426       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.4444444444444444 user2:0.38888888888888895 user3:1.2222222222222223 user4:0.888888888888889]
+I0116 03:31:34.622715       1 scheduler.go:406] [tanle] binding user4/pytorch-alexnet on GPU true-->meng-allox-egpu-4
+I0116 03:31:46.771881       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:46.771943       1 factory.go:1129] [meng] JCT: 57.886013477s, total jct: 8m44.463758735s, count: 19, average JCT: 27.603355722s
+I0116 03:31:48.418009       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:48.418048       1 factory.go:1129] [meng] JCT: 59.532132233s, total jct: 9m43.995890968s, count: 20, average JCT: 29.199794548s
+I0116 03:31:48.429461       1 factory.go:803] [tanle] Event pod completed user3/pytorch-lenet-4%!(EXTRA v1.PodPhase=Succeeded)
+I0116 03:31:48.429490       1 util.go:189] [tanle] FairScoreMap:  map[user2:0.38888888888888895 user3:1.027777777777778 user4:0.888888888888889 user1:0.4444444444444444]
+I0116 03:31:57.404748       1 factory.go:1122] [meng] deletePodFromCache
+I0116 03:31:57.404794       1 factory.go:1129] [meng] JCT: 1m8.518876657s, total jct: 10m52.514767625s, count: 21, average JCT: 31.072131791s

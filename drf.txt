@@ -1,0 +1,200 @@
+W0116 00:30:39.285781       1 options.go:272] Neither --kubeconfig nor --master was specified. Using default API client. This might not work.
+I0116 00:30:39.287208       1 server.go:128] Version: v0.0.0-master+$Format:%h$
+W0116 00:30:39.287228       1 defaults.go:207] TaintNodesByCondition is enabled, PodToleratesNodeTaints predicate is mandatory
+I0116 00:30:39.287456       1 factory.go:1512] [tanle] LogComplTimeFeature %!s(bool=true)
+I0116 00:30:39.287478       1 generic_scheduler.go:1830] version 1.11: 2018.10.29 4:00 EUROSYS1.3
+I0116 00:30:39.287484       1 generic_scheduler.go:1832] ENABLE_PROFILING true
+I0116 00:30:39.287490       1 generic_scheduler.go:1834] ============= IRA =============
+I0116 00:30:39.287495       1 generic_scheduler.go:1835] IS_TEST: false
+I0116 00:30:39.287501       1 generic_scheduler.go:1836] QUEUED_UP_JOBS: 40
+I0116 00:30:39.287507       1 generic_scheduler.go:1837] NUM_USERS: 4
+I0116 00:30:39.287512       1 generic_scheduler.go:1838] SCHEDULER DRF
+I0116 00:30:39.287518       1 generic_scheduler.go:1839] NUM_RESERVE_CPU_NODE %!s(int=1)
+I0116 00:30:39.287524       1 generic_scheduler.go:1840] ENABLE_MOCKUP_GPU %!s(bool=false)
+I0116 00:30:39.287547       1 util.go:362] [tanle] WORK around capacity &{176000 68719476736 0 0 map[ucare.cs.uchicago.edu/e-gpu:4]}
+W0116 00:30:39.289448       1 authorization.go:47] Authorization is disabled
+W0116 00:30:39.289481       1 authentication.go:55] Authentication is disabled
+I0116 00:30:39.289496       1 deprecated_insecure_serving.go:48] Serving healthz insecurely on [::]:10251
+I0116 00:30:40.190929       1 controller_utils.go:1027] Waiting for caches to sync for scheduler controller
+I0116 00:30:40.291138       1 controller_utils.go:1034] Caches are synced for scheduler controller
+I0116 00:30:51.415885       1 scheduling_queue.go:193] [meng] set schedule time to 2024-01-16 00:30:51.415866063 +0000 UTC m=+12.186374323
+I0116 00:30:51.417048       1 util.go:189] [tanle] FairScoreMap:  map[user2:0 user3:0 user4:0.25 user1:0]
+I0116 00:30:51.424053       1 scheduler.go:406] [tanle] binding user4/pytorch-lenet on GPU true-->meng-allox-egpu-3
+I0116 00:30:51.518129       1 util.go:189] [tanle] FairScoreMap:  map[user4:0.25 user1:0 user2:0.25 user3:0]
+I0116 00:30:51.520718       1 scheduler.go:406] [tanle] binding user2/pytorch-lenet on GPU true-->meng-allox-egpu-1
+I0116 00:30:51.619357       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.25 user2:0.25 user3:0 user4:0.25]
+I0116 00:30:51.622191       1 scheduler.go:406] [tanle] binding user1/pytorch-lenet on GPU true-->meng-allox-egpu-2
+I0116 00:30:51.720379       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.25 user2:0.5 user3:0 user4:0.25]
+I0116 00:30:51.722951       1 scheduler.go:406] [tanle] binding user2/pytorch-googlenet on GPU true-->meng-allox-egpu-4
+I0116 00:31:00.708389       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:00.708417       1 factory.go:1129] [meng] JCT: 9.292541545s, total jct: 9.292541545s, count: 1, average JCT: 9.292541545s
+I0116 00:31:00.731777       1 factory.go:803] [tanle] Event pod completed user4/pytorch-lenet%!(EXTRA v1.PodPhase=Succeeded)
+I0116 00:31:00.731837       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.25 user2:0.5 user3:0 user4:0]
+I0116 00:31:00.832667       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.25 user2:0.5 user3:0.25 user4:0]
+I0116 00:31:00.835579       1 scheduler.go:406] [tanle] binding user3/pytorch-lenet on GPU true-->meng-allox-egpu-3
+I0116 00:31:01.379190       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:01.379216       1 factory.go:1129] [meng] JCT: 9.963340465s, total jct: 19.25588201s, count: 2, average JCT: 9.627941005s
+I0116 00:31:01.453017       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.25 user2:0.5 user3:0.5 user4:0]
+I0116 00:31:01.459154       1 scheduler.go:406] [tanle] binding user3/pytorch-googlenet on GPU true-->meng-allox-egpu-1
+I0116 00:31:01.504815       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:01.504851       1 factory.go:1129] [meng] JCT: 10.088974915s, total jct: 29.344856925s, count: 3, average JCT: 9.781618975s
+I0116 00:31:01.553844       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.25 user2:0.5 user3:0.5 user4:0.25]
+I0116 00:31:01.556245       1 scheduler.go:406] [tanle] binding user4/pytorch-googlenet on GPU true-->meng-allox-egpu-2
+I0116 00:31:01.705193       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:01.705210       1 factory.go:1129] [meng] JCT: 10.289337883s, total jct: 39.634194808s, count: 4, average JCT: 9.908548702s
+I0116 00:31:01.715969       1 factory.go:803] [tanle] Event pod completed user2/pytorch-googlenet%!(EXTRA v1.PodPhase=Succeeded)
+I0116 00:31:01.715994       1 util.go:189] [tanle] FairScoreMap:  map[user3:0.5 user4:0.25 user1:0.25 user2:0.25]
+I0116 00:31:01.758606       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.25 user2:0.25 user3:0.5 user4:0.5]
+I0116 00:31:01.761329       1 scheduler.go:406] [tanle] binding user4/pytorch-resnet34 on GPU true-->meng-allox-egpu-4
+I0116 00:31:11.125131       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:11.125151       1 factory.go:1129] [meng] JCT: 19.709278892s, total jct: 59.3434737s, count: 5, average JCT: 11.86869474s
+I0116 00:31:11.174959       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.25 user2:0.5 user3:0.5 user4:0.5]
+I0116 00:31:11.177599       1 scheduler.go:406] [tanle] binding user2/pytorch-resnet34 on GPU true-->meng-allox-egpu-3
+I0116 00:31:12.802162       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:12.802190       1 factory.go:1129] [meng] JCT: 21.386314406s, total jct: 1m20.729788106s, count: 6, average JCT: 13.454964684s
+I0116 00:31:12.836863       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.5 user2:0.5 user3:0.5 user4:0.5]
+I0116 00:31:12.839576       1 scheduler.go:406] [tanle] binding user1/pytorch-googlenet on GPU true-->meng-allox-egpu-1
+I0116 00:31:12.872854       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:12.872888       1 factory.go:1129] [meng] JCT: 21.457012693s, total jct: 1m42.186800799s, count: 7, average JCT: 14.598114399s
+I0116 00:31:12.937700       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.75 user2:0.5 user3:0.5 user4:0.5]
+I0116 00:31:12.940419       1 scheduler.go:406] [tanle] binding user1/pytorch-resnet34 on GPU true-->meng-allox-egpu-2
+I0116 00:31:13.174440       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:13.174465       1 factory.go:1129] [meng] JCT: 21.758589996s, total jct: 2m3.945390795s, count: 8, average JCT: 15.493173849s
+I0116 00:31:13.185996       1 factory.go:803] [tanle] Event pod completed user4/pytorch-resnet34%!(EXTRA v1.PodPhase=Succeeded)
+I0116 00:31:13.186022       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.75 user2:0.5 user3:0.5 user4:0.25]
+I0116 00:31:13.245109       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.75 user2:0.75 user3:0.5 user4:0.25]
+I0116 00:31:13.247611       1 scheduler.go:406] [tanle] binding user2/pytorch-alexnet on GPU true-->meng-allox-egpu-4
+I0116 00:31:23.594731       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:23.594764       1 factory.go:1129] [meng] JCT: 32.178885609s, total jct: 2m36.124276404s, count: 9, average JCT: 17.347141822s
+I0116 00:31:23.701383       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.75 user2:0.75 user3:0.75 user4:0.25]
+I0116 00:31:23.703980       1 scheduler.go:406] [tanle] binding user3/pytorch-resnet34 on GPU true-->meng-allox-egpu-3
+I0116 00:31:24.135186       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:24.135211       1 factory.go:1129] [meng] JCT: 32.719335758s, total jct: 3m8.843612162s, count: 10, average JCT: 18.884361216s
+I0116 00:31:24.219010       1 util.go:189] [tanle] FairScoreMap:  map[user1:0.75 user2:0.75 user3:1 user4:0.25]
+I0116 00:31:24.221501       1 scheduler.go:406] [tanle] binding user3/pytorch-alexnet on GPU true-->meng-allox-egpu-1
+I0116 00:31:25.124472       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:25.124504       1 factory.go:1129] [meng] JCT: 33.708631374s, total jct: 3m42.552243536s, count: 11, average JCT: 20.232022139s
+I0116 00:31:25.151469       1 util.go:189] [tanle] FairScoreMap:  map[user4:0.25 user1:1 user2:0.75 user3:1]
+I0116 00:31:25.154073       1 scheduler.go:406] [tanle] binding user1/pytorch-alexnet on GPU true-->meng-allox-egpu-2
+I0116 00:31:26.661259       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:26.661276       1 factory.go:1129] [meng] JCT: 35.245403904s, total jct: 4m17.79764744s, count: 12, average JCT: 21.483137286s
+I0116 00:31:26.671891       1 factory.go:803] [tanle] Event pod completed user2/pytorch-alexnet%!(EXTRA v1.PodPhase=Succeeded)
+I0116 00:31:26.671916       1 util.go:189] [tanle] FairScoreMap:  map[user3:1 user4:0.25 user1:1 user2:0.5]
+I0116 00:31:26.705849       1 util.go:189] [tanle] FairScoreMap:  map[user1:1 user2:0.5 user3:1 user4:0.5]
+I0116 00:31:26.708390       1 scheduler.go:406] [tanle] binding user4/pytorch-alexnet on GPU true-->meng-allox-egpu-4
+I0116 00:31:35.928667       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:35.928694       1 factory.go:1129] [meng] JCT: 44.512819156s, total jct: 5m2.310466596s, count: 13, average JCT: 23.254651276s
+I0116 00:31:36.028069       1 util.go:189] [tanle] FairScoreMap:  map[user2:0.75 user3:1 user4:0.5 user1:1]
+I0116 00:31:36.030691       1 scheduler.go:406] [tanle] binding user2/pytorch-shufflenet on GPU true-->meng-allox-egpu-3
+I0116 00:31:37.496662       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:37.496688       1 factory.go:1129] [meng] JCT: 46.080812857s, total jct: 5m48.391279453s, count: 14, average JCT: 24.885091389s
+I0116 00:31:37.580622       1 util.go:189] [tanle] FairScoreMap:  map[user3:1 user4:0.75 user1:1 user2:0.75]
+I0116 00:31:37.583057       1 scheduler.go:406] [tanle] binding user4/pytorch-mobilenet on GPU true-->meng-allox-egpu-1
+I0116 00:31:38.449461       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:38.449486       1 factory.go:1129] [meng] JCT: 47.033610749s, total jct: 6m35.424890202s, count: 15, average JCT: 26.361659346s
+I0116 00:31:38.508991       1 util.go:189] [tanle] FairScoreMap:  map[user3:1.25 user4:0.75 user1:1 user2:0.75]
+I0116 00:31:38.511679       1 scheduler.go:406] [tanle] binding user3/pytorch-shufflenet on GPU true-->meng-allox-egpu-2
+I0116 00:31:40.151488       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:40.151512       1 factory.go:1129] [meng] JCT: 48.735637322s, total jct: 7m24.160527524s, count: 16, average JCT: 27.76003297s
+I0116 00:31:40.266897       1 util.go:189] [tanle] FairScoreMap:  map[user1:1.25 user2:0.75 user3:1.25 user4:0.75]
+I0116 00:31:40.269410       1 scheduler.go:406] [tanle] binding user1/pytorch-mobilenet on GPU true-->meng-allox-egpu-4
+I0116 00:31:51.404352       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:51.404381       1 factory.go:1129] [meng] JCT: 59.988504647s, total jct: 8m24.149032171s, count: 17, average JCT: 29.655825421s
+I0116 00:31:51.414944       1 factory.go:803] [tanle] Event pod completed user2/pytorch-shufflenet%!(EXTRA v1.PodPhase=Succeeded)
+I0116 00:31:51.414970       1 util.go:189] [tanle] FairScoreMap:  map[user1:1.25 user2:0.5 user3:1.25 user4:0.75]
+I0116 00:31:51.436907       1 util.go:189] [tanle] FairScoreMap:  map[user1:1.25 user2:0.5 user3:1.25 user4:1]
+I0116 00:31:51.439400       1 scheduler.go:406] [tanle] binding user4/pytorch-shufflenet on GPU true-->meng-allox-egpu-3
+I0116 00:31:52.996945       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:52.996964       1 factory.go:1129] [meng] JCT: 1m1.581092488s, total jct: 9m25.730124659s, count: 18, average JCT: 31.429451369s
+I0116 00:31:53.007827       1 factory.go:803] [tanle] Event pod completed user4/pytorch-mobilenet%!(EXTRA v1.PodPhase=Succeeded)
+I0116 00:31:53.007855       1 util.go:189] [tanle] FairScoreMap:  map[user1:1.25 user2:0.5 user3:1.25 user4:0.75]
+I0116 00:31:53.094147       1 util.go:189] [tanle] FairScoreMap:  map[user1:1.25 user2:0.75 user3:1.25 user4:0.75]
+I0116 00:31:53.096488       1 scheduler.go:406] [tanle] binding user2/pytorch-mobilenet on GPU true-->meng-allox-egpu-1
+I0116 00:31:54.857451       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:54.857476       1 factory.go:1129] [meng] JCT: 1m3.441600898s, total jct: 10m29.171725557s, count: 19, average JCT: 33.114301345s
+I0116 00:31:54.955665       1 util.go:189] [tanle] FairScoreMap:  map[user1:1.25 user2:1 user3:1.25 user4:0.75]
+I0116 00:31:54.958127       1 scheduler.go:406] [tanle] binding user2/pytorch-lenet-2 on GPU true-->meng-allox-egpu-2
+I0116 00:31:55.626023       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:31:55.626053       1 factory.go:1129] [meng] JCT: 1m4.210177646s, total jct: 11m33.381903203s, count: 20, average JCT: 34.66909516s
+I0116 00:31:55.676496       1 util.go:189] [tanle] FairScoreMap:  map[user2:1 user3:1.5 user4:0.75 user1:1.25]
+I0116 00:31:55.679050       1 scheduler.go:406] [tanle] binding user3/pytorch-mobilenet on GPU true-->meng-allox-egpu-4
+I0116 00:32:06.757876       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:32:06.757902       1 factory.go:1129] [meng] JCT: 1m15.342027353s, total jct: 12m48.723930556s, count: 21, average JCT: 36.605901455s
+I0116 00:32:06.844398       1 util.go:189] [tanle] FairScoreMap:  map[user1:1.5 user2:1 user3:1.5 user4:0.75]
+I0116 00:32:06.846829       1 scheduler.go:406] [tanle] binding user1/pytorch-shufflenet on GPU true-->meng-allox-egpu-3
+I0116 00:32:09.421261       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:32:09.421281       1 factory.go:1129] [meng] JCT: 1m18.005408748s, total jct: 14m6.729339304s, count: 22, average JCT: 38.487697241s
+I0116 00:32:09.529764       1 util.go:189] [tanle] FairScoreMap:  map[user1:1.5 user2:1 user3:1.5 user4:1]
+I0116 00:32:09.532532       1 scheduler.go:406] [tanle] binding user4/pytorch-lenet-2 on GPU true-->meng-allox-egpu-1
+I0116 00:32:11.101983       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:32:11.102013       1 factory.go:1129] [meng] JCT: 1m19.686136597s, total jct: 15m26.415475901s, count: 23, average JCT: 40.278933734s
+I0116 00:32:11.189367       1 util.go:189] [tanle] FairScoreMap:  map[user1:1.5 user2:1 user3:1.5 user4:1.25]
+I0116 00:32:11.191772       1 scheduler.go:406] [tanle] binding user4/pytorch-lenet-3 on GPU true-->meng-allox-egpu-4
+I0116 00:32:11.308955       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:32:11.308999       1 factory.go:1129] [meng] JCT: 1m19.893123403s, total jct: 16m46.308599304s, count: 24, average JCT: 41.929524971s
+I0116 00:32:11.320211       1 factory.go:803] [tanle] Event pod completed user2/pytorch-lenet-2%!(EXTRA v1.PodPhase=Succeeded)
+I0116 00:32:11.320237       1 util.go:189] [tanle] FairScoreMap:  map[user3:1.5 user4:1.25 user1:1.5 user2:0.75]
+I0116 00:32:11.393174       1 util.go:189] [tanle] FairScoreMap:  map[user1:1.5 user2:0.75 user3:1.75 user4:1.25]
+I0116 00:32:11.395250       1 scheduler.go:406] [tanle] binding user3/pytorch-lenet-2 on GPU true-->meng-allox-egpu-2
+I0116 00:32:22.275325       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:32:22.275352       1 factory.go:1129] [meng] JCT: 1m30.859477053s, total jct: 18m17.168076357s, count: 25, average JCT: 43.886723054s
+I0116 00:32:22.359183       1 util.go:189] [tanle] FairScoreMap:  map[user1:1.5 user2:1 user3:1.75 user4:1.25]
+I0116 00:32:22.361914       1 scheduler.go:406] [tanle] binding user2/pytorch-lenet-3 on GPU true-->meng-allox-egpu-3
+I0116 00:32:25.860828       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:32:25.860867       1 factory.go:1129] [meng] JCT: 1m34.444995286s, total jct: 19m51.613071643s, count: 26, average JCT: 45.831271986s
+I0116 00:32:25.881688       1 util.go:189] [tanle] FairScoreMap:  map[user3:1.75 user4:1.25 user1:1.75 user2:1]
+I0116 00:32:25.884549       1 scheduler.go:406] [tanle] binding user1/pytorch-lenet-2 on GPU true-->meng-allox-egpu-1
+I0116 00:32:27.790392       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:32:27.790422       1 factory.go:1129] [meng] JCT: 1m36.37454573s, total jct: 21m27.987617373s, count: 27, average JCT: 47.703245087s
+I0116 00:32:27.848830       1 util.go:189] [tanle] FairScoreMap:  map[user3:1.75 user4:1.25 user1:2 user2:1]
+I0116 00:32:27.851126       1 scheduler.go:406] [tanle] binding user1/pytorch-lenet-3 on GPU true-->meng-allox-egpu-2
+I0116 00:32:34.724828       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:32:34.724856       1 factory.go:1129] [meng] JCT: 1m43.308980515s, total jct: 23m11.296597888s, count: 28, average JCT: 49.68916421s
+I0116 00:32:34.737825       1 factory.go:803] [tanle] Event pod completed user4/pytorch-lenet-3%!(EXTRA v1.PodPhase=Succeeded)
+I0116 00:32:34.737870       1 util.go:189] [tanle] FairScoreMap:  map[user1:2 user2:1 user3:1.75 user4:1]
+I0116 00:32:34.774536       1 util.go:189] [tanle] FairScoreMap:  map[user4:1.25 user1:2 user2:1 user3:1.75]
+I0116 00:32:34.777325       1 scheduler.go:406] [tanle] binding user4/pytorch-lenet-5 on GPU true-->meng-allox-egpu-4
+I0116 00:32:42.233005       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:32:42.233033       1 factory.go:1129] [meng] JCT: 1m50.817157547s, total jct: 25m2.113755435s, count: 29, average JCT: 51.797026049s
+I0116 00:32:42.328300       1 util.go:189] [tanle] FairScoreMap:  map[user1:2 user2:1 user3:2 user4:1.25]
+I0116 00:32:42.330745       1 scheduler.go:406] [tanle] binding user3/pytorch-lenet-3 on GPU true-->meng-allox-egpu-1
+I0116 00:32:45.809251       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:32:45.809281       1 factory.go:1129] [meng] JCT: 1m54.393405025s, total jct: 26m56.50716046s, count: 30, average JCT: 53.883572015s
+I0116 00:32:45.838131       1 util.go:189] [tanle] FairScoreMap:  map[user1:2 user2:1 user3:2.25 user4:1.25]
+I0116 00:32:45.840712       1 scheduler.go:406] [tanle] binding user3/pytorch-lenet-5 on GPU true-->meng-allox-egpu-3
+I0116 00:32:51.376585       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:32:51.376604       1 factory.go:1129] [meng] JCT: 1m59.96073185s, total jct: 28m56.46789231s, count: 31, average JCT: 56.0150933s
+I0116 00:32:51.420848       1 util.go:189] [tanle] FairScoreMap:  map[user1:2.25 user2:1 user3:2.25 user4:1.25]
+I0116 00:32:51.423305       1 scheduler.go:406] [tanle] binding user1/pytorch-lenet-5 on GPU true-->meng-allox-egpu-2
+I0116 00:32:58.260115       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:32:58.260142       1 factory.go:1129] [meng] JCT: 2m6.844267027s, total jct: 31m3.312159337s, count: 32, average JCT: 58.228504979s
+I0116 00:32:58.273007       1 factory.go:803] [tanle] Event pod completed user4/pytorch-lenet-5%!(EXTRA v1.PodPhase=Succeeded)
+I0116 00:32:58.273051       1 util.go:189] [tanle] FairScoreMap:  map[user1:2.25 user2:1 user3:2.25 user4:1]
+I0116 00:32:58.349076       1 util.go:189] [tanle] FairScoreMap:  map[user1:2.25 user2:1.25 user3:2.25 user4:1]
+I0116 00:32:58.351474       1 scheduler.go:406] [tanle] binding user2/pytorch-lenet-5 on GPU true-->meng-allox-egpu-4
+I0116 00:33:05.764870       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:33:05.764901       1 factory.go:1129] [meng] JCT: 2m14.349022582s, total jct: 33m17.661181919s, count: 33, average JCT: 1m0.53518733s
+I0116 00:33:05.792297       1 util.go:189] [tanle] FairScoreMap:  map[user1:2.25 user2:1.5 user3:2.25 user4:1]
+I0116 00:33:05.794592       1 scheduler.go:406] [tanle] binding user2/pytorch-lenet-4 on GPU true-->meng-allox-egpu-1
+I0116 00:33:09.410777       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:33:09.410798       1 factory.go:1129] [meng] JCT: 2m17.994924988s, total jct: 35m35.656106907s, count: 34, average JCT: 1m2.813414909s
+I0116 00:33:09.512957       1 util.go:189] [tanle] FairScoreMap:  map[user1:2.25 user2:1.5 user3:2.5 user4:1]
+I0116 00:33:09.515589       1 scheduler.go:406] [tanle] binding user3/pytorch-lenet-4 on GPU true-->meng-allox-egpu-3
+I0116 00:33:14.992366       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:33:14.992394       1 factory.go:1129] [meng] JCT: 2m23.576518404s, total jct: 37m59.232625311s, count: 35, average JCT: 1m5.120932151s
+I0116 00:33:15.091742       1 util.go:189] [tanle] FairScoreMap:  map[user1:2.5 user2:1.5 user3:2.5 user4:1]
+I0116 00:33:15.094027       1 scheduler.go:406] [tanle] binding user1/pytorch-lenet-4 on GPU true-->meng-allox-egpu-2
+I0116 00:33:21.956559       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:33:21.956577       1 factory.go:1129] [meng] JCT: 2m30.540705363s, total jct: 40m29.773330674s, count: 36, average JCT: 1m7.493703629s
+I0116 00:33:22.012876       1 util.go:189] [tanle] FairScoreMap:  map[user2:1.5 user3:2.5 user4:1.25 user1:2.5]
+I0116 00:33:22.015558       1 scheduler.go:406] [tanle] binding user4/pytorch-lenet-4 on GPU true-->meng-allox-egpu-4
+I0116 00:33:36.412326       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:33:36.412358       1 factory.go:1129] [meng] JCT: 2m44.996482321s, total jct: 43m14.769812995s, count: 37, average JCT: 1m10.128913864s
+I0116 00:33:36.427419       1 factory.go:803] [tanle] Event pod completed user2/pytorch-lenet-4%!(EXTRA v1.PodPhase=Succeeded)
+I0116 00:33:36.427448       1 util.go:189] [tanle] FairScoreMap:  map[user1:2.5 user2:1.25 user3:2.5 user4:1.25]
+I0116 00:33:40.057329       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:33:40.057346       1 factory.go:1129] [meng] JCT: 2m48.641474378s, total jct: 46m3.411287373s, count: 38, average JCT: 1m12.721349667s
+I0116 00:33:45.740890       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:33:45.740910       1 factory.go:1129] [meng] JCT: 2m54.325037828s, total jct: 48m57.736325201s, count: 39, average JCT: 1m15.326572441s
+I0116 00:33:53.610907       1 factory.go:1122] [meng] deletePodFromCache
+I0116 00:33:53.610935       1 factory.go:1129] [meng] JCT: 3m2.195059394s, total jct: 51m59.931384595s, count: 40, average JCT: 1m17.998284614s

@@ -40,9 +40,9 @@ import (
 ///// Implemenation for AlloX /////
 
 /*************** IMPORTANT PARAMETERs *******************/
-const SCHEDULER = DRF
+const SCHEDULER = AlloX
 const AlphaFair = 0.5 //
-const NUM_USERS = 3
+const NUM_USERS = 4
 const SCHEDULER_PERIOD = 100 // Miliseconds
 
 const AVG_BETA = 95.0 * MILLI // based on simulator.
@@ -55,10 +55,10 @@ var SCHEDULE_START = time.Time{}
 var USING_FIFO = false
 
 const NUM_RESERVE_CPU_NODE = 1 //for master
-const MASTER_CPU_CORES = 20    //for master
-// const MASTER_CPU_CORES = 96    //for master
+// const MASTER_CPU_CORES = 20    //for master
+const MASTER_CPU_CORES = 352    //for master
 
-var QUEUED_UP_JOBS = 10 //
+var QUEUED_UP_JOBS = 40 //
 var AlloX_DEBUG = true
 
 // TODO: WORK AROUND  = break deadlock at begginning.
@@ -108,7 +108,7 @@ var PodMachineMap = make(map[int64]string)
 var NumOfNodes = 0
 var NumOfCPUNodes = 0
 var NumOfGPUNodes = 0
-var CPU_DEMAND_PER_JOB = 20
+var CPU_DEMAND_PER_JOB = 90
 
 var START_TIME = time.Now()
 var ARRIVAL_TIME = 0
@@ -898,8 +898,8 @@ func CreatePodOnOtherDevice(pod *v1.Pod, toBeGPU bool) (*v1.Pod, bool) {
 
 		cpuDemand, gpuDemand, memory := GetSecondaryDemand(pod)
 
-		glog.Infof("    Done creating pod on another device. New cpuDemand: %v, gpuDemand: %v, memory: %v", 
-						cpuDemand, gpuDemand, memory)
+		glog.Infof("    Done creating pod %v/%v on another device. New cpuDemand: %v, gpuDemand: %v, memory: %v", 
+						pod.Namespace, pod.Name, cpuDemand, gpuDemand, memory)
 
 		for rName := range container.Resources.Requests {
 			quantity := container.Resources.Requests[rName]
@@ -933,28 +933,28 @@ func CreatePodOnOtherDevice(pod *v1.Pod, toBeGPU bool) (*v1.Pod, bool) {
 
 func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 	// get the list of active users (having jobs queued up.)
-	glog.Infof("  Calling EqualShare to schedule...")
+	// glog.Infof("  Calling EqualShare to schedule...")
 	users := GetQueueUsers(allPods)
-	glog.Infof("[tanle] active users: %v", users)
-	glog.Infof("[meng] allPods: %v", allPods)
+	// glog.Infof("[tanle] active users: %v", users)
+	// glog.Infof("[meng] allPods: %v", allPods)
 	// get resource usage on each user
 	resourceMap := make(map[string]*Resource)
 	for _, user := range users {
 		resourceMap[user] = GetResourceUsageByNamespace(user)
-		glog.Infof("[meng] user: %v  sourcemap: %v", user, resourceMap[user])
+		// glog.Infof("[meng] user: %v  sourcemap: %v", user, resourceMap[user])
 	}
 
 	var pod *v1.Pod
 	shortestGPUComplt := int64(math.MaxInt64)
 	isGPUAvaiable := false
 	usage, capacity := GetResourceUsageAndCapacity()
-	glog.Infof("[tanle] GetResourceUsageAndCapacity usage/capacity %v/", usage, capacity)
+	// glog.Infof("[tanle] GetResourceUsageAndCapacity usage/capacity %v/", usage, capacity)
 
 	isGPUAvaiable = (capacity.ScalarResources[NvidiaGPU] - usage.ScalarResources[NvidiaGPU]) > NUM_RESERVE_GPU
 	isCPUAvaiable := (capacity.MilliCPU - usage.MilliCPU) > (NUM_RESERVE_CPU)*MILLI
 
 	if isGPUAvaiable {
-		glog.Infof("[meng] isGPUAvaiable")
+		// glog.Infof("[meng] isGPUAvaiable")
 		gpuShare := capacity.ScalarResources[NvidiaGPU] / int64(NUM_USERS)
 		var minUser string
 		minGpuUsage := int64(math.MaxInt64)
@@ -973,7 +973,7 @@ func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 			// glog.Infof("[tanle] pick user: %v", minUser)
 			// pick the pod with the shortest GPU complt.
 			// pod := allPods[0]
-			glog.Infof("[meng] USING_FIFO: %v", USING_FIFO)
+			// glog.Infof("[meng] USING_FIFO: %v", USING_FIFO)
 			if USING_FIFO {
 				for _, p := range allPods {
 					if minUser == p.Namespace {
@@ -985,7 +985,7 @@ func EqualShare(allPods []*v1.Pod, client clientset.Interface) *v1.Pod {
 			} else {
 				for _, p := range allPods {
 					complTime := GetGpuComplTime(p)
-					glog.Infof("[meng] GetGpuComplTime: %v", complTime)
+					// glog.Infof("[meng] GetGpuComplTime: %v", complTime)
 					if minUser == p.Namespace && GetGpuComplTime(p) < shortestGPUComplt {
 						pod = p
 						shortestGPUComplt = complTime
@@ -1528,6 +1528,7 @@ func OnlineAllox(allPods []*v1.Pod, client clientset.Interface, alpha float64) *
 	// do nothing if capacity is not syned.
 	if capacity.MilliCPU == 0 {
 		glog.Errorf("[tanle] OnlineAlloX: %v ==> deadlock", capacity)
+		glog.Infof("[meng] OnlineAlloX: %v ==> deadlock", capacity)
 		return nil
 	}
 
