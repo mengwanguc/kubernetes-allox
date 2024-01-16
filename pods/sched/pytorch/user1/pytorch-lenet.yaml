@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pytorch-lenet
+  name: user1-pytorch-lenet
   namespace: user1
 spec:
   schedulerName: my-scheduler

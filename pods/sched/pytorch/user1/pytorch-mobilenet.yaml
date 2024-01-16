@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pytorch-mobilenet
+  name: user1-pytorch-mobilenet
   namespace: user1
 spec:
   schedulerName: my-scheduler

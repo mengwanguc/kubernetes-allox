@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pytorch-shufflenet
+  name: user4-pytorch-shufflenet
   namespace: user4
 spec:
   schedulerName: my-scheduler

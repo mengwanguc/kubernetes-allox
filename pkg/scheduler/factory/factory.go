@@ -794,6 +794,9 @@ func (f *configFactory) computeComplTimeForAllPods(isCompleted bool) {
 		LabelSelector: labels.Everything().String(),
 	})
 	if err == nil {
+		if isCompleted {
+			glog.Infof("[meng] computeComplTimeForAllPods completed")
+		}
 		for _, pod := range pods.Items {
 			if isCompleted && pod.Status.Phase == v1.PodSucceeded {
 				// glog.Infof("[tanle] %v %s", pod.Name, pod.Status.Phase)
@@ -801,13 +804,17 @@ func (f *configFactory) computeComplTimeForAllPods(isCompleted bool) {
 					podStopTimes[pod.Name] = time.Since(podStartTimes[pod.Name])
 					// fmt.Println(" %v", podStopTimes)
 					glog.Infof("[tanle] Event pod completed %v/%s", pod.Namespace, pod.Name, pod.Status.Phase)
-					schedulercache.UpdateFairScore(&pod, false)
+					// schedulercache.UpdateFairScore(&pod, false)
 					schedulercache.DeletePodFromCache(&pod)
 				}
 			} else if !isCompleted && pod.Status.Phase == v1.PodRunning && pod.Namespace != "kube-scheduler" {
 				// glog.Infof("[tanle] %v %s", pod.Name, pod.Status.Phase)
 				if podStartTimes[pod.Name].IsZero() {
 					podStartTimes[pod.Name] = time.Now()
+				}
+			} else if isCompleted {
+				if podStopTimes[pod.Name] == 0 && pod.Namespace != "kube-scheduler" && pod.Namespace != "kube-system"{
+					// glog.Infof("[meng] Event pod completed podStopTimes = 0 %v/%s, %v", pod.Namespace, pod.Name, pod.Status.Phase)
 				}
 			}
 		}
@@ -1139,15 +1146,26 @@ func (c *configFactory) deletePodFromCache(obj interface{}) {
 	switch t := obj.(type) {
 	case *v1.Pod:
 		pod = t
+		glog.Infof("[meng] check delete pod %v/%s, %v", pod.Namespace, pod.Name, pod.Status.Phase)
+		if pod.Namespace != "kube-scheduler" && pod.Namespace != "kube-system" {
+			schedulercache.UpdateFairScore(pod, false)
+		}
 	case cache.DeletedFinalStateUnknown:
 		var ok bool
 		pod, ok = t.Obj.(*v1.Pod)
 		if !ok {
 			glog.Errorf("cannot convert to *v1.Pod: %v", t.Obj)
+			glog.Infof("[meng] t.obj cannot convert to *v1.Pod: %v", t.Obj)
 			return
+		} else {
+			glog.Infof("[meng] check delete pod %v/%s, %v", pod.Namespace, pod.Name, pod.Status.Phase)
+			if pod.Namespace != "kube-scheduler" && pod.Namespace != "kube-system" {
+				schedulercache.UpdateFairScore(pod, false)
+			}
 		}
 	default:
 		glog.Errorf("cannot convert to *v1.Pod: %v", t)
+		glog.Infof("[meng] t cannot convert to *v1.Pod: %v", t)
 		return
 	}
 	// NOTE: Because the scheduler uses snapshots of schedulerCache and the live

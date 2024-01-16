@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pytorch-alexnet
+  name: user2-pytorch-alexnet
   namespace: user2
 spec:
   schedulerName: my-scheduler

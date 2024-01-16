@@ -139,7 +139,12 @@ var CAPACITY = &Resource{MilliCPU: 0, Memory: 0, ScalarResources: map[v1.Resourc
 
 func UpdateFairScore(pod *v1.Pod, isStart bool) {
 
+	if !isStart {
+		glog.Infof("[meng] UpdateFairScore %v/%s, %v", pod.Namespace, pod.Name, isStart)
+	}
+
 	if strings.Contains(pod.Name, PROFILING_STR) {
+		glog.Infof("[meng] fail in UpdateFairScore %v/%s, %v", pod.Namespace, pod.Name, isStart)
 		return
 	}
 
@@ -149,6 +154,7 @@ func UpdateFairScore(pod *v1.Pod, isStart bool) {
 	fairVal := 0.0
 	if CAPACITY.MilliCPU == 0 {
 		glog.Errorf("[tanle] ERROR CAPACITY has not updated yet")
+		glog.Infof("[meng] CAPACITY.MilliCPU == 0 in UpdateFairScore %v/%s, %v", pod.Namespace, pod.Name, isStart)
 		return
 	}
 	if p1 < p2 {
@@ -183,6 +189,7 @@ func UpdateFairScore(pod *v1.Pod, isStart bool) {
 		AvailableTimes[MachinePodMap[pod.Name]] = GetCurrentTime() // if this machine is available.
 		// delete pod from machine.
 		machineId := MachinePodMap[pod.Name]
+		glog.Infof("[meng] delete PodMachineMap in UpdateFairScore %v/%s, %v", pod.Namespace, pod.Name, isStart)
 		delete(MachinePodMap, pod.Name)
 		delete(PodMachineMap, machineId)
 	}
@@ -1524,6 +1531,7 @@ func OnlineSJF(allPods []*v1.Pod, client clientset.Interface, alpha float64) *v1
 }
 
 func OnlineAllox(allPods []*v1.Pod, client clientset.Interface, alpha float64) *v1.Pod {
+	glog.Infof("[meng] calling OnlineAlloX")
 	_, capacity := GetResourceUsageAndCapacity()
 	// do nothing if capacity is not syned.
 	if capacity.MilliCPU == 0 {
@@ -1539,9 +1547,12 @@ func OnlineAllox(allPods []*v1.Pod, client clientset.Interface, alpha float64) *
 			numAvailMachines++
 		}
 	}
+	glog.Infof("[meng] numAvailMachines == %v,  allpods length: %v", 
+				numAvailMachines, len(allPods))
 	if numAvailMachines == 0 {
 		return nil
 	}
+	
 
 	// do nothing if no available machines.
 

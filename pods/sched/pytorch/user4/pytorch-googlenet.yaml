@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pytorch-googlenet
+  name: user4-pytorch-googlenet
   namespace: user4
 spec:
   schedulerName: my-scheduler
