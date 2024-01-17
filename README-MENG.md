@@ -80,15 +80,23 @@ kubectl get pods --namespace=kube-system
 kubectl get pods --all-namespaces
 ```
 
+
+
+### create namespace
+
+
+
 ```
 kubectl describe pod my-scheduler-5dbbfd997f-p6bhs -n kube-system
-kubectl logs my-scheduler-96649cb67-hv7xp  -n kube-system
+kubectl logs my-scheduler-96649cb67-6hfxx  -n kube-system
 kubectl logs pytorch-egpu -n user1
 kubectl describe pod pytorch-egpu -n user1
 kubectl exec --stdin --tty pytorch-egpu -n user1 -- /bin/bash
 
 kubectl logs pytorch-cpu -n user1
+kubectl logs pytorch-egpu -n user1
 kubectl describe pod pytorch-cpu -n user1
+kubectl describe pod pytorch-egpu -n user1
 ```
 
 Force Kubernetes to pull image: https://www.baeldung.com/ops/kubernetes-pull-image-again#:~:text=One%20way%20to%20force%20Kubernetes,already%20present%20on%20the%20node.
@@ -133,7 +141,7 @@ kubectl exec --stdin --tty pytorch-cpu -n user1 -- /bin/bash
 
 
 kubectl get pods --all-namespaces
-kubectl logs my-scheduler-96649cb67-x8rl7  -n kube-system
+kubectl logs my-scheduler-96649cb67-cqf97  -n kube-system
 
 ## Reserve CPU/memory resources
 
